@@ -37,6 +37,22 @@
 			}
 		},
 		"Lighting": {
+			"Bloom": {
+				"$className": "BloomEffect",
+				"$properties": {
+					"Intensity": 0.80,
+					"Size": 24,
+					"Threshold": 0.832
+				}
+			},
+			"ColorCorrection": {
+				"$className": "ColorCorrectEffect",
+				"$properties": {
+					"Brightness": 0,
+					"Contrast": 0.20,
+					"Saturation": -0.10
+				}
+			},
 			"$properties": {
 				"Technology": "Future",
 				"GlobalShadows": true
