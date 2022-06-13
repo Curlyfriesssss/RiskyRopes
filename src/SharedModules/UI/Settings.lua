@@ -8,7 +8,7 @@ end
 -- i thought this was cute
 -- does it suck?
 
--- this is definitely not a test comment
+-- internal name, display name, default state
 
 newSetting('music',			'IN-GAME MUSIC',		true)
 newSetting('upsidedown',	'UPSIDE DOWN MODE',		false)
