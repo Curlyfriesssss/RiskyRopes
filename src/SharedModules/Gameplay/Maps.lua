@@ -1,5 +1,7 @@
 -- god bless cmandeep4141
 
+-- Open source users wont have literally any of these maps besides RoomChan
+
 return {
 	['Diff'] = {
 		'Easy',
