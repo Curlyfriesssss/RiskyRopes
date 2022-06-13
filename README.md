@@ -1,6 +1,6 @@
 # RiskyRopes 
 
-Very incomplete rewrite of Risky ROpes
+Very incomplete rewrite of Risky Ropes
 
 All the original levels and skins will not be distributed here.
 
