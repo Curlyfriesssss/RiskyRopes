@@ -8,6 +8,8 @@ end
 -- i thought this was cute
 -- does it suck?
 
+-- this is definitely not a test comment
+
 newSetting('music',			'IN-GAME MUSIC',		true)
 newSetting('upsidedown',	'UPSIDE DOWN MODE',		false)
 newSetting('useskins',		'HIDE ROPE PHYSICS',	true)
