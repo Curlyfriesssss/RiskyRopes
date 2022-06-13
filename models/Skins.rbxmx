@@ -1,0 +1,40 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<Meta name="ExplicitAutoJoints">true</Meta>
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Folder" referent="RBX3053907BC82F4AE68B01D50BFDA8D7EF">
+		<Properties>
+			<BinaryString name="AttributesSerialize"></BinaryString>
+			<string name="Name">Skins</string>
+			<int64 name="SourceAssetId">-1</int64>
+			<BinaryString name="Tags"></BinaryString>
+		</Properties>
+		<Item class="Beam" referent="RBX42733A187EAA4721B92682C95AA43A27">
+			<Properties>
+				<Ref name="Attachment0">null</Ref>
+				<Ref name="Attachment1">null</Ref>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<float name="Brightness">1</float>
+				<ColorSequence name="Color">0 1 1 1 0 1 1 1 1 0 </ColorSequence>
+				<float name="CurveSize0">0</float>
+				<float name="CurveSize1">0</float>
+				<bool name="Enabled">true</bool>
+				<bool name="FaceCamera">true</bool>
+				<float name="LightEmission">1</float>
+				<float name="LightInfluence">0</float>
+				<string name="Name">Lightning</string>
+				<int name="Segments">1</int>
+				<int64 name="SourceAssetId">-1</int64>
+				<BinaryString name="Tags"></BinaryString>
+				<Content name="Texture"><url>rbxassetid://6024995614</url></Content>
+				<float name="TextureLength">10</float>
+				<token name="TextureMode">2</token>
+				<float name="TextureSpeed">25</float>
+				<NumberSequence name="Transparency">0 0 0 1 0 0 </NumberSequence>
+				<float name="Width0">2</float>
+				<float name="Width1">2</float>
+				<float name="ZOffset">0</float>
+			</Properties>
+		</Item>
+	</Item>
+</roblox>
