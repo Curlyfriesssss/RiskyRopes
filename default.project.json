@@ -46,7 +46,7 @@
 				}
 			},
 			"ColorCorrection": {
-				"$className": "ColorCorrectEffect",
+				"$className": "ColorCorrectionEffect",
 				"$properties": {
 					"Brightness": 0,
 					"Contrast": 0.20,
