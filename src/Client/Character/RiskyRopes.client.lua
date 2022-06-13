@@ -23,22 +23,27 @@ SkinAttach.Position = Vector3.new(0.30,0,-0.50)
 
 local MOUSE_DOWN = false
 
-function sleep(l)
-	if not l then return true end
 
-	local startTime = tick()
+-- This was used before in the original Risky Ropes
+-- cant remember why I used it but I'll keep it here anyway
+-- maybe it matters idk too lazy to test
 
-	while tick() - startTime < l do RS.Heartbeat:Wait() end
+-- function sleep(l)
+-- 	if not l then return true end
 
-	return true
+-- 	local startTime = tick()
 
-end
+-- 	while tick() - startTime < l do RS.Heartbeat:Wait() end
+
+-- 	return true
+
+-- end
 
 function WipeObjects()
 	for _, Obj: Instance in pairs(Objects) do
 		if Obj:IsA(FORCE_TYPE) then
 			task.spawn(function()
-				sleep(0.250)
+				task.wait(0.250)
 				Obj:Destroy()
 			end)
 		else

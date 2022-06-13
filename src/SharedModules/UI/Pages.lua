@@ -22,12 +22,17 @@ local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
 
 local UIFolder = game.ReplicatedStorage.UI
 
+-- why yes I did hardcode this...
+-- pls dont be mad im just not sure where else to put 4 colors
+
 local DifficultyColors = {
 	[1] = Color3.new(0.333333, 1, 0.498039),
 	[2] = Color3.new(1, 0.666667, 0),
 	[3] = Color3.new(0.333333, 0, 0.498039),
 	[4] = Color3.new(1, 0, 0)
 }
+
+-- and this...
 
 local StatsFormat = [[ 
 Playtime: %s
