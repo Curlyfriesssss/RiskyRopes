@@ -50,7 +50,8 @@
 				"CharacterWalkSpeed": 32,
 				"UserEmotesEnabled": false,
 				"HealthDisplayDistance": 0,
-				"NameDisplayDistance": 0
+				"NameDisplayDistance": 0,
+				"EnableMouseLockOption": false
 			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts"
