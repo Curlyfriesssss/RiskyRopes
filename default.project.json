@@ -36,6 +36,12 @@
 				"$path": "src/UI"
 			}
 		},
+		"Lighting": {
+			"$properties": {
+				"Technology": "Future",
+				"GlobalShadows": true
+			}
+		},
 		"SoundService": {
 			"Music": {
 				"$className": "SoundGroup"
@@ -51,7 +57,8 @@
 				"UserEmotesEnabled": false,
 				"HealthDisplayDistance": 0,
 				"NameDisplayDistance": 0,
-				"EnableMouseLockOption": false
+				"EnableMouseLockOption": false,
+				"GameSettingsAvatar": "R6"
 			},
 			"StarterPlayerScripts": {
 				"$className": "StarterPlayerScripts"
