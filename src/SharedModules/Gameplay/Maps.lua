@@ -1,3 +1,5 @@
+-- god bless cmandeep4141
+
 return {
 	['Diff'] = {
 		'Easy',

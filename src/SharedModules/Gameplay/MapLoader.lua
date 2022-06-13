@@ -1,3 +1,8 @@
+-- someone one day is gonna ask, why did boogle make the capitalization on the functions in this game so
+-- fucking horrible, well my good man, purely because I am a fucking idiot
+-- take the L loser
+-- smh my head
+
 local mapLoader = {}
 local self = {}
 

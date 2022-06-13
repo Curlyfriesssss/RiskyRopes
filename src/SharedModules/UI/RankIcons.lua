@@ -1,3 +1,5 @@
+-- this is probably illegal somewhere
+
 return {
 	[1] 	= {'Beginner 1', 	'rbxassetid://9764077158'},
 	[2] 	= {'Beginner 2', 	'rbxassetid://9764076999'},

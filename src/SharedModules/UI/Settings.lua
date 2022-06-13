@@ -4,6 +4,10 @@ local function newSetting(Key: string, Name: string, Default: boolean | NumberRa
 	settings[Key] = {Name = Name:upper(), Default = Default}
 end
 
+-- im sorry if this sucks
+-- i thought this was cute
+-- does it suck?
+
 newSetting('music',			'IN-GAME MUSIC',		true)
 newSetting('upsidedown',	'UPSIDE DOWN MODE',		false)
 newSetting('useskins',		'HIDE ROPE PHYSICS',	true)

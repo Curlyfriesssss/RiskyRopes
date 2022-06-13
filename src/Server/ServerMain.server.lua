@@ -7,9 +7,6 @@ local HTTP = game:GetService('HttpService')
 
 local ModulesFolder = game.ServerStorage.ServerModules
 
--- Bools
-local MouseLocked = false
-
 -- Tables
 local Mods = {}
 

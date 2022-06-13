@@ -1,3 +1,6 @@
+-- this method of ui design is so dogshit
+-- i am sorry
+
 local PagesModule = {}
 local self = {}
 

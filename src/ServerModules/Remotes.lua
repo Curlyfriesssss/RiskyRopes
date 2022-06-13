@@ -9,9 +9,14 @@ return function(ImportantData)
 	local RemotesToFunctions = {
 		[Remotes.GetSelfData] = function(Player: Player)
 			local TO = tick() + 3
-			repeat wait() until tick() > TO or UserAccounts[Player]
+
+			-- This wait is here to insure the players data has loaded, might be shit idk
+			-- who the fuck said i was a good programmer lmao
+
+			repeat task.wait() until tick() > TO or UserAccounts[Player]
 			return UserAccounts[Player]:getData()
 		end,
+		
 		[Remotes.GetSelfStats] = function(Player: Player)
 			if StatCache[Player] and StatCache[Player].FetchTime  + 60 > os.time() then return StatCache[Player] end
 			

@@ -1,4 +1,4 @@
--- This module is purely for offline testing
+-- This module is purely for offline testing, I am a silly goose like that
 
 local StoreService = {}
 local FakeDatastore = {}

@@ -1,3 +1,7 @@
+-- im pretty positive this is shit
+-- like 99% positive
+-- but shit is my middle name 👽
+
 local Camera = workspace.CurrentCamera
 local MapLoader = require(script.Parent.MapLoader)
 
