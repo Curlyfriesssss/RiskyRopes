@@ -1,5 +1,5 @@
-type ReceiptInfo = {PlayerId: number, PlaceIdWherePurchased: number, PurchaseId: string, ProductId: number, CurrencyType: Enum.CurrencyType, CurrencySpent: number}
-type ShortReceipt = {Spent: number, ProductId: number, PurchaseId: number}
+export type ReceiptInfo = {PlayerId: number, PlaceIdWherePurchased: number, PurchaseId: string, ProductId: number, CurrencyType: Enum.CurrencyType, CurrencySpent: number}
+export type ShortReceipt = {Spent: number, ProductId: number, PurchaseId: number}
 
 local purchase = {}
 local MT = {__index = purchase}
