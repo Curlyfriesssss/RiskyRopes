@@ -13,8 +13,9 @@ local Pages: Frame = Menu.Pages
 
 local ModulesFolder = game.ReplicatedStorage.Modules
 
-local MapsFolder = ModulesFolder.Gameplay.Maps
-local MapData = require(MapsFolder)
+local MapsFolder = game.ReplicatedStorage.Models.Maps
+local MapsModule = ModulesFolder.Gameplay.Maps
+local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
 
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
@@ -75,7 +76,8 @@ function PagesModule:loadMapList()
 		local MapCount = 0
 		
 		for MapName, MapInfo in pairs(MapData) do
-			if MapName ~= 'Diff' then
+			-- Makes sure the current iteration is a map and we have the map folder for it.
+			if MapName ~= 'Diff' and MapsFolder:FindFirstChild(MapName) then
 				if MapInfo.Difficulty == K then
 					MapCount += 1
 					local Map = UIFolder.Map:Clone()
