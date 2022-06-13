@@ -1,0 +1,57 @@
+{
+	"name": "riskyropes",
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"$path": "src/Storage",
+			"Modules": {
+				"$path": "src/SharedModules"
+			},
+			"Models": {
+				"$path": "models"
+			}
+		},
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"$path": "src/Server"
+		},
+		"ServerStorage": {
+			"$className": "ServerStorage",
+			"$ignoreUnknownInstances": true,
+			"ServerModules": {
+				"$path": "src/ServerModules"
+			}
+		},
+		"StarterGui": {
+			"$className": "StarterGui",
+			"$ignoreUnknownInstances": true,
+			"UI": {
+				"$className": "ScreenGui",
+				"$properties": {
+					"ZIndexBehavior": "Sibling",
+					"IgnoreGuiInset": true,
+					"ResetOnSpawn": false
+				},
+				"$path": "src/UI"
+			}
+		},
+		"SoundService": {
+			"Music": {
+				"$className": "SoundGroup"
+			}
+		},
+		"StarterPlayer": {
+			"$className": "StarterPlayer",
+			"StarterPlayerScripts": {
+				"$className": "StarterPlayerScripts"
+			},
+			"StarterCharacterScripts": {
+				"$className": "StarterCharacterScripts",
+				"$ignoreUnknownInstances": true,
+				"$path": "src/Client/Character"
+			},
+			"$ignoreUnknownInstances": true
+		}
+	}
+}
