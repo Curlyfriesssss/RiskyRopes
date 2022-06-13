@@ -1,5 +1,7 @@
 # RiskyRopes 
 
+All the original levels and skins will not be distributed here.
+
 ## Getting Started
 To build the place from scratch, use:
 
