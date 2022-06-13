@@ -3,7 +3,7 @@
 -- Open source users wont have literally any of these maps besides RoomChan
 
 return {
-	['Diff'] = {
+	['Diff'] = { -- more hard coding garbage
 		'Easy',
 		'Average',
 		'Hard',
