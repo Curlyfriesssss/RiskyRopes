@@ -12,6 +12,11 @@
 				"$path": "models"
 			}
 		},
+		"Players": {
+			"$properties": {
+				"RespawnTime": 0
+			}
+		},
 		"ServerScriptService": {
 			"$className": "ServerScriptService",
 			"$path": "src/Server"
