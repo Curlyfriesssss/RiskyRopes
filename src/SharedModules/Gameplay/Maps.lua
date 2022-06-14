@@ -226,12 +226,12 @@ return {
 		Difficulty = 4,
 	},
 	
-	['Neo'] = {
-		Author = {616587143 ,28696939},
-		Image = 7618771627,
-		Description = '',
-		Difficulty = 4,
-	},
+	-- ['Neo'] = {
+	-- 	Author = {616587143 ,28696939},
+	-- 	Image = 7618771627,
+	-- 	Description = '',
+	-- 	Difficulty = 4,
+	-- },
 	
 	['Sea Duel'] = {
 		Author = 219801956,
