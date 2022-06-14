@@ -7,7 +7,6 @@ local self = {}
 
 local Remotes = game.ReplicatedStorage.Remotes
 
-
 local MyData: Account
 
 return setmetatable(self, {__index = {

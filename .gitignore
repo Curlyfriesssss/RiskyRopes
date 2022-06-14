@@ -7,3 +7,4 @@ Skins.rbxmx
 /*.rbxlx.lock
 /*.rbxl.lock
 models/Maps.rbxmx
+src/ServerModules/WebServerInfo.lua
