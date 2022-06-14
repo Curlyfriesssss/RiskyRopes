@@ -13,6 +13,7 @@
 			}
 		},
 		"Players": {
+			"$className": "Players",
 			"$properties": {
 				"RespawnTime": 0
 			}
