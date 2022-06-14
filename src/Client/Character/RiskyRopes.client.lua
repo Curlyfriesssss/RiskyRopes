@@ -1,32 +1,30 @@
-local Character: Model = script.Parent
-local Camera = workspace.CurrentCamera
-
-local ROPE_FORCE = 2600
-local Objects = {}
-
-local ObjectFolder = Instance.new('Folder', workspace); ObjectFolder.Name = 'OBJECTS'
-
 local CAS = game:GetService('ContextActionService')
 local RS = game:GetService('RunService')
 local TS = game:GetService('TweenService')
 
-local RayParams = RaycastParams.new(); RayParams.FilterType = Enum.RaycastFilterType.Whitelist
+local Character	: Model = script.Parent
+local Camera	: Camera = workspace.CurrentCamera
 
 local CAST_DISTANCE = 125
-
+local ROPE_FORCE = 2600
 local FORCE_TYPE = 'BodyForce'
+local MOUSE_DOWN = false
 
+local Objects	: {Instance} = {}
+
+local ObjectFolder = Instance.new('Folder', workspace); ObjectFolder.Name = 'OBJECTS'
 local Attach0: Attachment = Character.HumanoidRootPart:FindFirstChildOfClass('Attachment')
 local SkinAttach = Attach0:Clone()
 SkinAttach.Parent = Attach0.Parent
 SkinAttach.Position = Vector3.new(0.30,0,-0.50)
 
-local MOUSE_DOWN = false
+local RayParams = RaycastParams.new(); RayParams.FilterType = Enum.RaycastFilterType.Whitelist
 
+
+--------------------------------------------------------------------------------------------------
 
 -- This was used before in the original Risky Ropes
 -- cant remember why I used it but I'll keep it here anyway
--- maybe it matters idk too lazy to test
 
 -- function sleep(l)
 -- 	if not l then return true end
@@ -42,7 +40,7 @@ local MOUSE_DOWN = false
 function WipeObjects()
 	for _, Obj: Instance in pairs(Objects) do
 		if Obj:IsA(FORCE_TYPE) then
-			task.spawn(function()
+			task.spawn(function() -- Crappy method to insure the force is deleted .25 seconds after we let go of our rope
 				task.wait(0.250)
 				Obj:Destroy()
 			end)
@@ -91,7 +89,6 @@ function updateParams()
 		workspace.Map.Parts,
 		workspace.Map.Orbs
 	}
-
 end
 
 function EyeTrace()
@@ -114,7 +111,6 @@ function Rope(_, State: Enum.UserInputState)
 	local EyeHit = EyeTrace()
 	
 	repeat
-		
 		EyeHit = EyeTrace()
 		RS.RenderStepped:Wait()
 	until EyeHit or not MOUSE_DOWN
@@ -143,12 +139,14 @@ CAS:BindAction('Rope', Rope,false,Enum.UserInputType.MouseButton1, Enum.KeyCode.
 
 local RootPart = Character.HumanoidRootPart
 
+-- Dynamic FOV
 RS.RenderStepped:Connect(function()
 	TS:Create(game.Workspace.CurrentCamera, TweenInfo.new(.75), {FieldOfView = math.clamp(RootPart.Velocity.Magnitude,90,120)}):Play()
 end)
 
+-- Apply a force so the player is faster when rope swinging
 RS.Heartbeat:Connect(function()
 	if Objects.Force and Character.HumanoidRootPart then
-		Objects.Force.Force = Camera.CFrame.LookVector * Vector3.new(ROPE_FORCE, Character.HumanoidRootPart:GetMass() * game.Workspace.Gravity, ROPE_FORCE)
+		Objects.Force.Force = Camera.CFrame.LookVector * Vector3.new(ROPE_FORCE, RootPart:GetMass() * game.Workspace.Gravity, ROPE_FORCE)
 	end
 end)
