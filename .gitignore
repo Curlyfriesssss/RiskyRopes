@@ -8,3 +8,4 @@ Skins.rbxmx
 /*.rbxl.lock
 models/Maps.rbxmx
 src/ServerModules/WebServerInfo.lua
+src/ServerModules/Authorization.lua
