@@ -33,7 +33,8 @@ function _Init()
 		Music = require(ModulesFolder.Music),
 		Account = require(ModulesFolder.Account),
 		Remotes = require(ModulesFolder.Remotes),
-		Purchase = require(ModulesFolder.PurchaseHandler)
+		Purchase = require(ModulesFolder.PurchaseHandler),
+		WebServer = require(ModulesFolder.WebServer)
 	}
 
 	-- Music Player
