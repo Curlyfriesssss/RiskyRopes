@@ -20,7 +20,7 @@ end)
 
 if failed then dprint('Authorization failed to load') return end
 
-local function generateRequest(page, method, body)
+local function generateRequest(page: string, method: string, body: table)
 	method = method or 'GET'
 	local Body = HTTPS:JSONEncode(body or {}) 
 

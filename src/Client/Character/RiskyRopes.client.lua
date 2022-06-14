@@ -139,7 +139,6 @@ function Rope(_, State: Enum.UserInputState)
 	
 end
 
-
 CAS:BindAction('Rope', Rope,false,Enum.UserInputType.MouseButton1, Enum.KeyCode.Q)
 
 local RootPart = Character.HumanoidRootPart
