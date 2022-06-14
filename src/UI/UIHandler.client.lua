@@ -29,9 +29,6 @@ local MouseLocked = false
 -- Constants
 local PatternMoveTime = 2
 
--- TODO Change timer
-local timer = tick()
-
 -- Instances
 local UI = script.Parent
 local HUD = UI.HUD
@@ -53,7 +50,8 @@ local Mods = {
 	RankIcons = require(Modules.UI.RankIcons),
 	Functions = require(Modules.UI.Functions),
 	MapLoader = require(Modules.Gameplay.MapLoader),
-	Pages = require(Modules.UI.Pages)
+	Pages = require(Modules.UI.Pages),
+	Timer = require(Modules.Gameplay.Timer)
 }
 
 ---------------------------------------
@@ -85,7 +83,7 @@ function Init()
 
 	
 	RS.RenderStepped:Connect(function()
-		HUD.Timer.Text = ("%0.3f"):format(tick() - timer)
+		
 		
 		UIS.MouseBehavior = if MouseLocked then Enum.MouseBehavior.LockCenter else Enum.MouseBehavior.Default
 		UIS.MouseIconEnabled = not MouseLocked
@@ -113,8 +111,6 @@ function Init()
 	Mods.MapLoader.MapLoadedEvent.Event:Connect(function()
 		MouseLocked = true
 		Menu.Visible = false
-		
-		timer = tick()
 		
 		MoveToSpawn(game.Players.LocalPlayer.Character)
 	end)
@@ -152,7 +148,7 @@ end, false, Enum.KeyCode.K)
 
 CAS:BindAction('Reset', function(_,b)
 	if b == Enum.UserInputState.Begin then 
-		timer = tick()
+		
 		MoveToSpawn(Player.Character)
 	end
 	

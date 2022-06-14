@@ -70,10 +70,15 @@ function mapLoader:load(MapName: string)
 		end
 	end
 	
-	for _, v in pairs(MapObject:GetDescendants()) do
+	for _, v: BasePart | SpawnLocation in pairs(MapObject:GetDescendants()) do
 		if v:IsA('SpawnLocation') then
 			self.CurrentSpawn = v
 			break
+		-- dyrex mode one day
+		
+		-- elseif v:IsA("BasePart") then 
+		-- 	v.Material = Enum.Material.Foil
+		-- 	v.MaterialVariant = 'Dyrex'
 		end
 	end
 	
