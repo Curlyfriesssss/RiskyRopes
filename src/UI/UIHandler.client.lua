@@ -30,9 +30,9 @@ local MouseLocked = false
 local PatternMoveTime = 2
 
 -- Instances
-local UI = script.Parent
-local HUD = UI.HUD
-local Menu = UI.Menu
+local UI: Frame = script.Parent
+local HUD: Frame = UI.HUD
+local Menu: Frame = UI.Menu
 
 local Modules = game.ReplicatedStorage.Modules
 local UIFolder = game.ReplicatedStorage.UI
@@ -59,7 +59,7 @@ local Mods = {
 ---------------------------------------
 
 function MoveToSpawn(C: Model)
-	repeat wait() until C.PrimaryPart
+	repeat task.wait() until C.PrimaryPart
 	
 	C.HumanoidRootPart.Velocity = Vector3.zero
 	
@@ -83,7 +83,7 @@ function Init()
 
 	
 	RS.RenderStepped:Connect(function()
-		
+		HUD.Timer.Text = ('%0.3f'):format(Mods.Timer.CurrentTime)
 		
 		UIS.MouseBehavior = if MouseLocked then Enum.MouseBehavior.LockCenter else Enum.MouseBehavior.Default
 		UIS.MouseIconEnabled = not MouseLocked
@@ -109,14 +109,25 @@ function Init()
 	end
 	
 	Mods.MapLoader.MapLoadedEvent.Event:Connect(function()
+		Mods.Timer:Start()
+
 		MouseLocked = true
 		Menu.Visible = false
 		
+		-- Temporary timer pause
+		workspace.Map.Orbs:GetChildren()[1].Touched:Connect(function(P)
+			if game.Players:GetPlayerFromCharacter(P.Parent) == Player then
+				Mods.Timer:Pause()
+			end
+		end)
+
 		MoveToSpawn(game.Players.LocalPlayer.Character)
 	end)
 
 	Player.CharacterAdded:Connect(function(C)
 		MoveToSpawn(C)
+
+		Mods.Timer:Start()
 	end)
 	
 	coroutine.wrap(function()
@@ -148,6 +159,7 @@ end, false, Enum.KeyCode.K)
 
 CAS:BindAction('Reset', function(_,b)
 	if b == Enum.UserInputState.Begin then 
+		Mods.Timer:Start()
 		
 		MoveToSpawn(Player.Character)
 	end
