@@ -12,7 +12,7 @@ end
 shared.Menu = shared.UI.Menu
 shared.PlayerList = shared.UI.PlayerList
 shared.HUD = shared.UI.HUD
-
+shared.Settings = require(game.ReplicatedStorage.Modules.UI.Settings)
 ---------------------------------------
 -- Variables
 ---------------------------------------
@@ -100,6 +100,7 @@ function Init()
 	
 	Mods.Pages:loadMapList()
 	Mods.Pages:UpdateStats()
+	Mods.Pages:LoadSettings()
 	
 	for _, Button: GuiButton in pairs(Menu.TopBar.Selection:GetChildren()) do
 		if Button:IsA('GuiButton') then

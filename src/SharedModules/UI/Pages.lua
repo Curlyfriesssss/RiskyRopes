@@ -11,6 +11,8 @@ local Functions = require(script.Parent.Functions)
 local Menu: Frame = shared.Menu
 local Pages: Frame = Menu.Pages
 
+
+
 local ModulesFolder = game.ReplicatedStorage.Modules
 
 local MapsFolder = game.ReplicatedStorage.Models.Maps
@@ -129,6 +131,14 @@ function PagesModule:loadMapList()
 			MapLabel:Destroy()
 		end
 		
+	end
+end
+
+function PagesModule:LoadSettings()
+	for SettingInternalName, Setting in pairs(shared.Settings) do
+		local S = game.ReplicatedStorage.UI.Setting:Clone()
+		S.Text = Setting.Name
+		S.Parent = Pages.Settings.Settings
 	end
 end
 

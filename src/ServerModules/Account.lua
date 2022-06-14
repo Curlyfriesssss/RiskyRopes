@@ -35,13 +35,13 @@ end
 
 function new()
 	local self = {
-		XP = 10^10,
+		XP = 0,
 		Ranking = 0,
 		Wins = 0, 
 		Networth = 0,
 		Ropes = 0,
 		
-		Cash = 10^5, -- Starting Money
+		Cash = 0, -- Starting Money
 		Playtime = 0,
 		AccountNotice = {
 			Title = 'test',
