@@ -8,7 +8,7 @@ end
 -- i thought this was cute
 -- does it suck?
 
--- internal name, display name, default state
+-- internal name, display name, default state (default if number range)
 
 newSetting('music',			'IN-GAME MUSIC',		true)
 newSetting('upsidedown',	'UPSIDE DOWN MODE',		false)
