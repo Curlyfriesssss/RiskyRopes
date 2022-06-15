@@ -153,7 +153,7 @@ local SettingTypesFunc = {
 		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
 		
 		ThisSlider:init()
-		ThisSlider:Update()
+		ThisSlider:Set(CurrentValue[2])
 	end
 }
 
