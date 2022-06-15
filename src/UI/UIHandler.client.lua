@@ -149,13 +149,13 @@ Init()
 
 DataHandler:UpdateTopBar()
 
-CAS:BindAction('TestCrate', function(_,b)
-	if b == Enum.UserInputState.Begin then 
-		Mods.Pages:OpenCrate()
-	end
+-- CAS:BindAction('TestCrate', function(_,b)
+-- 	if b == Enum.UserInputState.Begin then 
+-- 		Mods.Pages:OpenCrate()
+-- 	end
 	
 
-end, false, Enum.KeyCode.K)
+-- end, false, Enum.KeyCode.K)
 
 CAS:BindAction('Reset', function(_,b)
 	if b == Enum.UserInputState.Begin then 

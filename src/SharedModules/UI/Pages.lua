@@ -21,9 +21,11 @@ local MapsModule = ModulesFolder.Gameplay.Maps
 local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
 local SliderCreator = require(script.Parent.Slider)
+local ColorPicker = require(script.Parent.ColorPicker)
 
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
 
+local New = require(script.Parent.WindowCreator)
 
 local UIFolder = game.ReplicatedStorage.UI
 
@@ -47,6 +49,27 @@ Networth: $%s
 
 Purchases: %s
 Robux Spent: R$%s]]
+
+local SettingTypesFunc = {
+	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
+		local function UpdateCheckbox()
+			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
+		end
+
+		UpdateCheckbox()
+
+		Button.MouseButton1Click:Connect(function()
+			CurrentValue = not CurrentValue
+			UpdateCheckbox()
+		end)
+	end,
+	['table'] = function(Slider: TextButton, CurrentValue: {NumberRange})
+		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
+		
+		ThisSlider:init()
+		ThisSlider:Set(CurrentValue[2])
+	end
+}
 
 function PagesModule:UpdateStats()
 	local MyStats = game.ReplicatedStorage.Remotes.GetSelfStats:InvokeServer()
@@ -136,26 +159,14 @@ function PagesModule:loadMapList()
 	end
 end
 
-local SettingTypesFunc = {
-	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
-		local function UpdateCheckbox()
-			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
-		end
+function PagesModule:ColorPicker()
+	local ColorPickWindow = New "ColorPicker" {}
+	local CPick = ColorPicker.new(ColorPickWindow)
+	CPick:init()
+	CPick:Update()
 
-		UpdateCheckbox()
-
-		Button.MouseButton1Click:Connect(function()
-			CurrentValue = not CurrentValue
-			UpdateCheckbox()
-		end)
-	end,
-	['table'] = function(Slider: TextButton, CurrentValue: {NumberRange})
-		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
-		
-		ThisSlider:init()
-		ThisSlider:Set(CurrentValue[2])
-	end
-}
+	return ColorPickWindow
+end
 
 function PagesModule:LoadSettings()
 	for SettingInternalName, Setting in pairs(shared.Settings) do

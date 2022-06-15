@@ -13,7 +13,8 @@ function Slider.new(SliderGUI: TextButton, CurrentValue: {NumberRange})
 	self.Min = CurrentValue[1].Min
 	self.MouseDown = false
 	self.Unit = if CurrentValue[3] then CurrentValue[3] else ''
-	
+	self.UpdateEvent = Instance.new('BindableEvent')
+
 	return setmetatable(self, {__index = Slider})
 end
 
@@ -57,6 +58,8 @@ function Slider:Update(MPos: Vector2, ForceProgress: number)
 	local ValueText = math.floor(self.Value) .. ' ' .. self.Unit
 
 	self._GUI.Value.Text = ValueText
+
+	self.UpdateEvent:Fire()
 
 	self._GUI.fill.Size = UDim2.fromScale(self._progress,1)
 	self._GUI.point.Position = UDim2.fromScale(self._progress,0.5)
