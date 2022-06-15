@@ -11,7 +11,7 @@ local Functions = require(script.Parent.Functions)
 local Menu: Frame = shared.Menu
 local Pages: Frame = Menu.Pages
 
-
+local UITextures = require(script.Parent.UITextures)
 
 local ModulesFolder = game.ReplicatedStorage.Modules
 
@@ -134,11 +134,31 @@ function PagesModule:loadMapList()
 	end
 end
 
+local SettingTypesFunc = {
+	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
+		local function UpdateCheckbox()
+			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
+		end
+		
+		UpdateCheckbox()
+
+		Button.MouseButton1Click:Connect(function()
+			CurrentValue = not CurrentValue
+			UpdateCheckbox()
+		end)
+	end
+}
+
 function PagesModule:LoadSettings()
 	for SettingInternalName, Setting in pairs(shared.Settings) do
 		local S = game.ReplicatedStorage.UI.Setting:Clone()
-		S.Text = Setting.Name
+		local SType = type(Setting.Default)
+		if not S.Types:FindFirstChild(SType) then S:Destroy(); continue end
+
+		S.Title.Text = Setting.Name
 		S.Parent = Pages.Settings.Settings
+		S.Types[SType].Visible = true
+		SettingTypesFunc[SType](S.Types[SType], Setting)
 	end
 end
 
