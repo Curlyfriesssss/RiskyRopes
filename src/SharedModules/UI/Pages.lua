@@ -22,7 +22,6 @@ local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
 local SliderCreator = require(script.Parent.Slider)
 local ColorPicker = require(script.Parent.ColorPicker)
-
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
 
 local New = require(script.Parent.WindowCreator)
@@ -49,27 +48,6 @@ Networth: $%s
 
 Purchases: %s
 Robux Spent: R$%s]]
-
-local SettingTypesFunc = {
-	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
-		local function UpdateCheckbox()
-			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
-		end
-
-		UpdateCheckbox()
-
-		Button.MouseButton1Click:Connect(function()
-			CurrentValue = not CurrentValue
-			UpdateCheckbox()
-		end)
-	end,
-	['table'] = function(Slider: TextButton, CurrentValue: {NumberRange})
-		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
-		
-		ThisSlider:init()
-		ThisSlider:Set(CurrentValue[2])
-	end
-}
 
 function PagesModule:UpdateStats()
 	local MyStats = game.ReplicatedStorage.Remotes.GetSelfStats:InvokeServer()
@@ -159,20 +137,42 @@ function PagesModule:loadMapList()
 	end
 end
 
-function PagesModule:ColorPicker()
-	local ColorPickWindow = New "ColorPicker" {}
-	local CPick = ColorPicker.new(ColorPickWindow)
-	CPick:init()
-	CPick:Update()
+local SettingTypesFunc = {
+	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
+		local function UpdateCheckbox()
+			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
+		end
 
-	return ColorPickWindow
-end
+		UpdateCheckbox()
+
+		Button.MouseButton1Click:Connect(function()
+			CurrentValue = not CurrentValue
+			UpdateCheckbox()
+		end)
+	end,
+	['NumberRange'] = function(Slider: TextButton, CurrentValue: {NumberRange})
+		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
+		
+		ThisSlider:init()
+		ThisSlider:Set(CurrentValue[2])
+	end,
+	['Color3'] = function(Button: TextButton, CurrentValue)
+		Button.MouseButton1Click:Connect(function()
+			local Window = New "ColorPicker" {}
+			local ColorPicker = ColorPicker.new(Window)
+			ColorPicker:init()
+			ColorPicker:Update()
+			Window.Parent = Menu
+		end)
+	end
+}
 
 function PagesModule:LoadSettings()
 	for SettingInternalName, Setting in pairs(shared.Settings) do
 		local S = game.ReplicatedStorage.UI.Setting:Clone()
-		local SType = type(Setting.Default)
-		
+		local SType = typeof(Setting.Default)
+		if SType == 'table' then SType = typeof(Setting.Default[1]) end
+
 		if not S.Types:FindFirstChild(SType) then S:Destroy(); continue end
 		
 		S.Name = Setting.Name:lower()
