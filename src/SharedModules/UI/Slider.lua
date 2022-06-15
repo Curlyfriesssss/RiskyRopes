@@ -1,6 +1,7 @@
 local Slider = {}
 
 local UIS = game:GetService('UserInputService')
+local map = require(script.Parent.Functions).Map
 
 function Slider.new(SliderGUI: TextButton, CurrentValue: {NumberRange})
 	local self = {}
@@ -11,7 +12,8 @@ function Slider.new(SliderGUI: TextButton, CurrentValue: {NumberRange})
 	self.Max = CurrentValue[1].Max
 	self.Min = CurrentValue[1].Min
 	self.MouseDown = false
-
+	self.Unit = if CurrentValue[3] then CurrentValue[3] else ''
+	
 	return setmetatable(self, {__index = Slider})
 end
 
@@ -29,10 +31,6 @@ function Slider:init()
 	UIS.InputEnded:Connect(function(IO: InputObject)
 		if IO.UserInputType == Enum.UserInputType.MouseButton1 and self.MouseDown then self.MouseDown = false end
 	end)
-end
-
-function map(x, in_min, in_max, out_min, out_max)
-	return out_min + (x - in_min)*(out_max - out_min)/(in_max - in_min)
 end
 
 function Slider:_Step()
@@ -56,7 +54,7 @@ function Slider:Update(MPos: Vector2, ForceProgress: number)
 
 	self.Value = map(self._progress, 0, 1, self.Min, self.Max)
 
-	local ValueText = math.floor(self.Value)
+	local ValueText = math.floor(self.Value) .. ' ' .. self.Unit
 
 	self._GUI.Value.Text = ValueText
 

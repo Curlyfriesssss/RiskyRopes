@@ -29,5 +29,8 @@ return {
 			secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
 			return hours..":"..mins..":"..secs
 		end
+	end,
+	Map = function(x, in_min, in_max, out_min, out_max)
+		return out_min + (x - in_min)*(out_max - out_min)/(in_max - in_min)
 	end
 }

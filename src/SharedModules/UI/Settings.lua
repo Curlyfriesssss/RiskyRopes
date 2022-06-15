@@ -26,6 +26,6 @@ newSetting('tips',			'HELP MESSAGES',		true)
 newSetting('key_display',	'KEYSTROKE DISPLAY',	false)
 newSetting('wind',			'WIND NOISE',			true)
 newSetting('developer_mode','DEBUG MODE',			false)
-newSetting('cheatactive',	'DYREX MODE',			false)
+newSetting('bubble_radius',	'BUBBLE RADIUS',		{NumberRange.new(0,10),5,'studs'})
 
 return settings

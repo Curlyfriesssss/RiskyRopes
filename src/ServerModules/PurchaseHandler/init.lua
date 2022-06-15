@@ -12,7 +12,7 @@ local DSSEnabled = pcall(function()
 	DSS:GetDataStore('RandomStore')
 end)
 
-if not DSSEnabled then DSS = require(script.Parent.LocalStores) end
+if not DSSEnabled then DSS = require(script.Parent.Data.LocalStores) end
 
 local PurchaseHistoryStore = DSS:GetDataStore(shared.DatastoreName, 'Purchases')
 local HTTPS = game:GetService('HttpService')
