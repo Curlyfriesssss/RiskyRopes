@@ -5,6 +5,7 @@ local PagesModule = {}
 local self = {}
 
 local TS = game:GetService('TweenService')
+local UIS = game:GetService('UserInputService')
 
 local Functions = require(script.Parent.Functions)
 
@@ -19,6 +20,7 @@ local MapsFolder = game.ReplicatedStorage.Models.Maps
 local MapsModule = ModulesFolder.Gameplay.Maps
 local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
+local SliderCreator = require(script.Parent.Slider)
 
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
 
@@ -139,13 +141,19 @@ local SettingTypesFunc = {
 		local function UpdateCheckbox()
 			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
 		end
-		
+
 		UpdateCheckbox()
 
 		Button.MouseButton1Click:Connect(function()
 			CurrentValue = not CurrentValue
 			UpdateCheckbox()
 		end)
+	end,
+	['table'] = function(Slider: TextButton, CurrentValue: {NumberRange})
+		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
+		
+		ThisSlider:init()
+		ThisSlider:Update()
 	end
 }
 
@@ -153,12 +161,14 @@ function PagesModule:LoadSettings()
 	for SettingInternalName, Setting in pairs(shared.Settings) do
 		local S = game.ReplicatedStorage.UI.Setting:Clone()
 		local SType = type(Setting.Default)
+		
 		if not S.Types:FindFirstChild(SType) then S:Destroy(); continue end
-
+		
+		S.Name = Setting.Name:lower()
 		S.Title.Text = Setting.Name
 		S.Parent = Pages.Settings.Settings
 		S.Types[SType].Visible = true
-		SettingTypesFunc[SType](S.Types[SType], Setting)
+		SettingTypesFunc[SType](S.Types[SType], Setting.Default)
 	end
 end
 
