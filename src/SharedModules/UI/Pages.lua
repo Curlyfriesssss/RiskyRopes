@@ -158,7 +158,7 @@ local SettingTypesFunc = {
 		ThisSlider:Set(CurrentValue[2])
 
 		ThisSlider.UpdateEvent.Event:Connect(function()
-			UpdateEvent:Fire(ThisSlider.Value)
+			UpdateEvent:Fire(math.floor(ThisSlider.Value))
 		end)
 	end,
 	['Color3'] = function(UpdateEvent: BindableEvent, Button: TextButton, CurrentValue)
@@ -188,7 +188,7 @@ function PagesModule:LoadSettings()
 		local UpdateEvent = Instance.new('BindableEvent')
 
 		UpdateEvent.Event:Connect(function(New: any)
-			shared.Settings[SettingInternalName] = New
+			shared.Settings[SettingInternalName].Value = New
 		end)
 			
 		S.Name = Setting.Name:lower()
