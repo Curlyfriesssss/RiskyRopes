@@ -141,7 +141,14 @@ local RootPart = Character.HumanoidRootPart
 
 -- Dynamic FOV
 RS.RenderStepped:Connect(function()
-	TS:Create(game.Workspace.CurrentCamera, TweenInfo.new(.75), {FieldOfView = math.clamp(RootPart.Velocity.Magnitude,90,120)}):Play()
+	local dfov = shared.Settings.dfov.Value
+	local fov = shared.Settings.fov.Value
+	
+	if dfov then 
+		TS:Create(Camera, TweenInfo.new(.75), {FieldOfView = math.clamp(RootPart.Velocity.Magnitude,fov,fov + 30)}):Play()
+	else
+		Camera.FieldOfView = fov
+	end
 end)
 
 -- Apply a force so the player is faster when rope swinging
