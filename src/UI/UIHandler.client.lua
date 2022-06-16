@@ -62,9 +62,7 @@ function MoveToSpawn(C: Model)
 	repeat task.wait() until C.PrimaryPart
 	
 	C.HumanoidRootPart.Velocity = Vector3.zero
-	
-	
-	
+
 	C:SetPrimaryPartCFrame(Mods.MapLoader.CurrentSpawn.CFrame * CFrame.new(0,2,0))
 	task.spawn(function()
 		task.wait(1/30)
@@ -72,6 +70,17 @@ function MoveToSpawn(C: Model)
 			Camera.CFrame = CFrame.new(Camera.CFrame.Position, workspace.Map.Rays.LookPart.Position)
 		end)
 	end)
+end
+
+function WaitForMove()
+
+	-- Definitely need to improve upon this method eventually.
+
+	local Character = Player.Character
+
+	repeat
+		task.wait()
+	until (Character.HumanoidRootPart.Velocity * Vector3.new(1,0,1)).Magnitude > 5
 end
 
 
@@ -99,6 +108,7 @@ function Init()
 	Mods.Pages:loadMapList()
 	Mods.Pages:UpdateStats()
 	Mods.Pages:LoadSettings()
+	Mods.Pages:LoadLeaderboards()
 	
 	for _, Button: GuiButton in pairs(Menu.TopBar.Selection:GetChildren()) do
 		if Button:IsA('GuiButton') then
@@ -109,10 +119,15 @@ function Init()
 	end
 	
 	Mods.MapLoader.MapLoadedEvent.Event:Connect(function()
-		Mods.Timer:Start()
-
 		MouseLocked = true
 		Menu.Visible = false
+
+		
+		
+		MoveToSpawn(game.Players.LocalPlayer.Character)
+
+		WaitForMove()
+		Mods.Timer:Start()
 		
 		-- Temporary timer pause
 		workspace.Map.Orbs:GetChildren()[1].Touched:Connect(function(P)
@@ -121,12 +136,14 @@ function Init()
 			end
 		end)
 
-		MoveToSpawn(game.Players.LocalPlayer.Character)
+		
 	end)
 
 	Player.CharacterAdded:Connect(function(C)
 		MoveToSpawn(C)
 
+		WaitForMove()
+		
 		Mods.Timer:Start()
 	end)
 	
@@ -159,9 +176,15 @@ DataHandler:UpdateTopBar()
 
 CAS:BindAction('Reset', function(_,b)
 	if b == Enum.UserInputState.Begin then 
+		MoveToSpawn(Player.Character)
+
+		Mods.Timer:Stop()
+
+		WaitForMove()
+		
 		Mods.Timer:Start()
 		
-		MoveToSpawn(Player.Character)
+		
 	end
 	
 end, false, Enum.KeyCode.R)
