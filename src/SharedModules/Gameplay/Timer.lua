@@ -12,6 +12,8 @@ Timer.State = STOPPED
 Timer.Loop = RS.RenderStepped:Connect(function()
 	if Timer.State == RUNNING then
 		Timer.CurrentTime = tick() - Timer.StartTick
+	elseif Timer.State == STOPPED then
+		Timer.CurrentTime = 0
 	end
 end)
 
