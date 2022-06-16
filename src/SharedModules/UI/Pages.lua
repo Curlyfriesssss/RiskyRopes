@@ -162,12 +162,18 @@ local SettingTypesFunc = {
 		end)
 	end,
 	['Color3'] = function(UpdateEvent: BindableEvent, Button: TextButton, CurrentValue)
+		local Color = CurrentValue[2]
+		Button.BackgroundColor3 = Color
+
 		Button.MouseButton1Click:Connect(function()
 			local Window = New "ColorPicker" {}
 			local ColorPicker = ColorPicker.new(Window, UpdateEvent)
+			
+			ColorPicker:Set(Color)
 
 			UpdateEvent.Event:Connect(function(New: Color3)
 				Button.BackgroundColor3 = New
+				Color = New
 			end)
 
 			ColorPicker:init()
