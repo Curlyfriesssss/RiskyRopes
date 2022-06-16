@@ -28,4 +28,6 @@ newSetting('wind',			'WIND NOISE',			true)
 newSetting('developer_mode','DEBUG MODE',			false)
 newSetting('bubble_radius',	'BUBBLE RADIUS',		{NumberRange.new(0,10),5,'studs'})
 newSetting('testcolor',		'COLOR TEST',			{Color3.new(1,1,1)})
+
+
 return settings
