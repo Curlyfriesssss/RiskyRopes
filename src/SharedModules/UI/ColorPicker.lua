@@ -47,6 +47,17 @@ function ColorPicker:init()
 	end)
 end
 
+function ColorPicker:Set(New: Color3)
+	local H,S,V = Color3.toHSV(New)
+
+	local Crosshair = self._GUI.ColorPickerFrame.Crosshair
+	Crosshair.Position = UDim2.fromScale(S,1-V)
+
+	self.HueSlider:Set(math.floor(H*360))
+
+	self:Update()
+end
+
 function ColorPicker:Update(MPos: Vector2)
 	local PickerSize = self._GUI.ColorPickerFrame.AbsoluteSize
 	local PickerPosition = self._GUI.ColorPickerFrame.AbsolutePosition
