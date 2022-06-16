@@ -205,6 +205,18 @@ function PagesModule:LoadSettings()
 	end
 end
 
+function PagesModule:LoadLeaderboards()
+	-- Load map buttons
+	for MapName,MapInfo in MapData do
+		if MapName ~= 'Diff' then
+			local Button = New "LeaderboardMap" {MapName = MapName}
+			Button.Parent = Pages.Leaderboards.TopBar
+			Button.Image = ('rbxassetid://%s'):format(MapInfo.Image)
+			Button.Name = MapName:lower()
+		end
+	end
+end
+
 function PagesModule:OpenCrate()
 	local Scene = SceneLoader(game.ReplicatedStorage.Models.Scenes.CrateOpening)
 	Scene.AnimationTrack:GetMarkerReachedSignal('Particles'):Connect(function()
