@@ -3,7 +3,7 @@ local Slider = require(script.Parent.Slider)
 
 local UIS = game:GetService("UserInputService")
 
-function ColorPicker.new(GUI: Frame)
+function ColorPicker.new(GUI: Frame, UpdateEvent:BindableEvent)
 	local self = {}
 
 	self._GUI = GUI
@@ -17,14 +17,21 @@ function ColorPicker.new(GUI: Frame)
 
 	self.MouseDown = false
 
+	self.UpdateEvent = UpdateEvent
+
 	self.HueSlider.UpdateEvent.Event:Connect(function()
 		self:Update()
+		
 	end)
 
 	return setmetatable(self, {__index = ColorPicker})
 end
 
 function ColorPicker:init()
+	self._GUI.Submit.MouseButton1Click:Connect(function()
+		self._GUI:Destroy()
+	end)
+
 	self._GUI.ColorPickerFrame.MouseButton1Down:Connect(function()
 		self.MouseDown = true
 		
@@ -62,6 +69,8 @@ function ColorPicker:Update(MPos: Vector2)
 	self._GUI.ColorPickerFrame.UIGradient.Color = ColorSequence.new(Color3.new(1,1,1),HueOnly)
 
 	self._GUI.SelectedColor.BackgroundColor3 = self.Color
+
+	self.UpdateEvent:Fire(self.Color)
 end
 
 

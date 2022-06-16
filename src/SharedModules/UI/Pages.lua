@@ -138,7 +138,7 @@ function PagesModule:loadMapList()
 end
 
 local SettingTypesFunc = {
-	['boolean'] = function(Button: ImageButton, CurrentValue: boolean)
+	['boolean'] = function(UpdateEvent: BindableEvent, Button: ImageButton, CurrentValue: boolean)
 		local function UpdateCheckbox()
 			Button.Image = UITextures.Checkbox[if CurrentValue then 'On' else 'Off']
 		end
@@ -147,19 +147,29 @@ local SettingTypesFunc = {
 
 		Button.MouseButton1Click:Connect(function()
 			CurrentValue = not CurrentValue
+			UpdateEvent:Fire(CurrentValue)
 			UpdateCheckbox()
 		end)
 	end,
-	['NumberRange'] = function(Slider: TextButton, CurrentValue: {NumberRange})
+	['NumberRange'] = function(UpdateEvent: BindableEvent, Slider: TextButton, CurrentValue: {NumberRange})
 		local ThisSlider = SliderCreator.new(Slider, CurrentValue)
 		
 		ThisSlider:init()
 		ThisSlider:Set(CurrentValue[2])
+
+		ThisSlider.UpdateEvent.Event:Connect(function()
+			UpdateEvent:Fire(ThisSlider.Value)
+		end)
 	end,
-	['Color3'] = function(Button: TextButton, CurrentValue)
+	['Color3'] = function(UpdateEvent: BindableEvent, Button: TextButton, CurrentValue)
 		Button.MouseButton1Click:Connect(function()
 			local Window = New "ColorPicker" {}
-			local ColorPicker = ColorPicker.new(Window)
+			local ColorPicker = ColorPicker.new(Window, UpdateEvent)
+
+			UpdateEvent.Event:Connect(function(New: Color3)
+				Button.BackgroundColor3 = New
+			end)
+
 			ColorPicker:init()
 			ColorPicker:Update()
 			Window.Parent = Menu
@@ -175,11 +185,17 @@ function PagesModule:LoadSettings()
 
 		if not S.Types:FindFirstChild(SType) then S:Destroy(); continue end
 		
+		local UpdateEvent = Instance.new('BindableEvent')
+
+		UpdateEvent.Event:Connect(function(New: any)
+			shared.Settings[SettingInternalName] = New
+		end)
+			
 		S.Name = Setting.Name:lower()
 		S.Title.Text = Setting.Name
 		S.Parent = Pages.Settings.Settings
 		S.Types[SType].Visible = true
-		SettingTypesFunc[SType](S.Types[SType], Setting.Default)
+		SettingTypesFunc[SType](UpdateEvent, S.Types[SType], Setting.Default)
 	end
 end
 
