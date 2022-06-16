@@ -1,10 +1,18 @@
+local function HasProperty(Object: Instance, PropertyName: string)
+	local Success = pcall(function()
+		return Object[PropertyName]
+	end)
+
+	return Success
+end
+
 function ApplyProperty(Object: GuiObject, PropertyValue: string)
 	local KeyToEdit
 	
 	local PossibleKeys = {'Text','Image'}
 	
 	for _, Key in pairs(PossibleKeys) do
-		if Object[Key] then
+		if HasProperty(Object,Key) then
 			KeyToEdit = Key
 			break
 		end

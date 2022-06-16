@@ -32,5 +32,8 @@ return {
 	end,
 	Map = function(x, in_min, in_max, out_min, out_max)
 		return out_min + (x - in_min)*(out_max - out_min)/(in_max - in_min)
+	end,
+	QuickAvatar = function(UserID: number)
+		return ("https://www.roblox.com/headshot-thumbnail/image?userId=%s&width=420&height=420&format=png"):format(UserID)
 	end
 }

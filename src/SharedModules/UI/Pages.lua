@@ -8,6 +8,7 @@ local TS = game:GetService('TweenService')
 local UIS = game:GetService('UserInputService')
 
 local Functions = require(script.Parent.Functions)
+local Remotes = game.ReplicatedStorage.Remotes
 
 local Menu: Frame = shared.Menu
 local Pages: Frame = Menu.Pages
@@ -205,6 +206,32 @@ function PagesModule:LoadSettings()
 	end
 end
 
+function ClearLeaderboard()
+	for _, Object in Pages.Leaderboards.Leaderboard:GetChildren() do
+		if Object:IsA("Frame") then
+			Object:Destroy()
+		end
+	end
+end
+
+function LoadLeaderboard(MapName: string)
+	ClearLeaderboard()
+
+	local Result = Remotes.GetLeaderboard:InvokeServer(MapName)
+	
+	for Index, ThisResult in Result do
+		local LUser = New "LUser" {
+			Username = ThisResult.User,
+			Score = ThisResult.Score,
+			Headshot = Functions.QuickAvatar(ThisResult.User)
+		}
+		LUser.LayoutOrder = ThisResult.Score
+
+		LUser.Parent = Pages.Leaderboards.Leaderboard
+	end
+
+end
+
 function PagesModule:LoadLeaderboards()
 	-- Load map buttons
 	for MapName,MapInfo in MapData do
@@ -213,6 +240,11 @@ function PagesModule:LoadLeaderboards()
 			Button.Parent = Pages.Leaderboards.TopBar
 			Button.Image = ('rbxassetid://%s'):format(MapInfo.Image)
 			Button.Name = MapName:lower()
+
+			Button.MapName.MouseButton1Click:Connect(function()
+				LoadLeaderboard(MapName)
+				
+			end)
 		end
 	end
 end

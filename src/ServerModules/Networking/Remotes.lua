@@ -32,6 +32,19 @@ return function(ImportantData)
 			
 			return Stats
 		end,
+		[Remotes.GetLeaderboard] = function(Player: Player, MapName: string)
+			local FakeResult = {}
+
+			for i = 1, 100 do
+				table.insert(FakeResult, {
+					User = if math.random(1,2) == 1 then 1551878098 else 41372847,
+					Score = math.random(7100,20000)
+				}
+			)
+			end
+
+			return FakeResult
+		end
 	}
 	
 	for Remote, FunctionToRun in pairs(RemotesToFunctions) do

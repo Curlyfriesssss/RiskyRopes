@@ -8,6 +8,10 @@
       {
         "Name": "GetSelfStats",
         "ClassName": "RemoteFunction"
-      }
+      },
+	  {
+		"Name": "GetLeaderboard",
+		"ClassName": "RemoteFunction"
+	  }
     ]
   }
