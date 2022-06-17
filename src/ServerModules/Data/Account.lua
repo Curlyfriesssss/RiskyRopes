@@ -43,11 +43,10 @@ function new()
 		
 		Cash = 0, -- Starting Money
 		Playtime = 0,
-		AccountNotice = {
+		AccountNotice = {{
 			Title = 'test',
-			Message = 'hello boogle man',
-			State = true
-		},
+			Content = 'hello boogle man',
+		}},
 		Notifications = {},
 	}
 
