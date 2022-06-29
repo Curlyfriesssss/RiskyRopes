@@ -1,13 +1,20 @@
+local UIS = game:GetService('UserInputService')
+
 local Slider = {}
 
-local UIS = game:GetService('UserInputService')
 local map = require(script.Parent.Functions).Map
+
+local function Step(self)
+	local Multiple = 1 / self.Max
+	self._progress = math.floor(self._progress / Multiple + 0.5) * Multiple
+end
 
 function Slider.new(SliderGUI: TextButton, CurrentValue: {NumberRange})
 	local self = {}
 
 	self._GUI = SliderGUI
 	self._progress = 0
+	
 	self.Value = 0
 	self.Max = CurrentValue[1].Max
 	self.Min = CurrentValue[1].Min
@@ -34,11 +41,6 @@ function Slider:init()
 	end)
 end
 
-function Slider:_Step()
-	local Multiple = 1 / self.Max
-	self._progress = math.floor(self._progress / Multiple + 0.5) * Multiple
-end
-
 function Slider:Update(MPos: Vector2, ForceProgress: number)
 	local SliderSize = self._GUI.AbsoluteSize
 	local SliderPosition = self._GUI.AbsolutePosition
@@ -51,7 +53,7 @@ function Slider:Update(MPos: Vector2, ForceProgress: number)
 	end
 
 	self._progress = math.clamp(self._progress,0,1)
-	self:_Step()
+	Step(self)
 
 	self.Value = map(self._progress, 0, 1, self.Min, self.Max)
 
