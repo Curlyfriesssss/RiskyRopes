@@ -1,10 +1,9 @@
-local HttpService = game:GetService("HttpService")
+local DSS: DataStoreService = game:GetService('DataStoreService')
+
 export type Account = {XP: number, Wins: number, Cash: number, Playtime: number, AccountNotice: {Title: string, Message: string, State: boolean}}
 
 local account = {}
 local MT = {__index = account}
-
-local DSS: DataStoreService = game:GetService('DataStoreService')
 
 local DSSEnabled = pcall(function()
 	DSS:GetDataStore('RandomStore')
@@ -43,11 +42,10 @@ function new()
 		
 		Cash = 0, -- Starting Money
 		Playtime = 0,
-		AccountNotice = {
+		AccountNotice = {{
 			Title = 'test',
-			Message = 'hello boogle man',
-			State = true
-		},
+			Content = 'hello boogle man',
+		}},
 		Notifications = {},
 	}
 

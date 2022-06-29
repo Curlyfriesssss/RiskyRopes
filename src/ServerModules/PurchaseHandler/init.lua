@@ -1,12 +1,13 @@
-export type ReceiptInfo = {PlayerId: number, PlaceIdWherePurchased: number, PurchaseId: string, ProductId: number, CurrencyType: Enum.CurrencyType, CurrencySpent: number}
-export type ShortReceipt = {Spent: number, ProductId: number, PurchaseId: number}
+local MPS = game:GetService('MarketplaceService')
+local DSS = game:GetService('DataStoreService')
+local HTTPS = game:GetService('HttpService')
 
 local purchase = {}
 local MT = {__index = purchase}
 local self = {}
 
-local MPS = game:GetService('MarketplaceService')
-local DSS = game:GetService('DataStoreService')
+export type ReceiptInfo = {PlayerId: number, PlaceIdWherePurchased: number, PurchaseId: string, ProductId: number, CurrencyType: Enum.CurrencyType, CurrencySpent: number}
+export type ShortReceipt = {Spent: number, ProductId: number, PurchaseId: number}
 
 local DSSEnabled = pcall(function()
 	DSS:GetDataStore('RandomStore')
@@ -15,7 +16,7 @@ end)
 if not DSSEnabled then DSS = require(script.Parent.Data.LocalStores) end
 
 local PurchaseHistoryStore = DSS:GetDataStore(shared.DatastoreName, 'Purchases')
-local HTTPS = game:GetService('HttpService')
+
 
 local KeyFormat = shared.KeyFormat
 

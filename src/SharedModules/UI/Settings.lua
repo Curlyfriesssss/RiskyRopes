@@ -17,7 +17,7 @@ newSetting('crosscolor2',		'CROSSHAIR COLOR 2',	{Color3.new(),Color3.new(1,0,0)}
 -- Sliders
 newSetting('mvolume',		'MUSIC VOLUME',			{NumberRange.new(0, 10),1})
 newSetting('fov',			'FIELD OF VIEW',		{NumberRange.new(60,120),90})
-newSetting('bubble_radius',	'BUBBLE RADIUS',		{NumberRange.new(0,10),5,'studs'})
+newSetting('bubble_radius',	'BUBBLE RADIUS',		{NumberRange.new(0,25),6,'studs'})
 
 -- Toggles
 newSetting('music',			'IN-GAME MUSIC',		true)

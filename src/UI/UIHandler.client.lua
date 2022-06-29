@@ -51,7 +51,8 @@ local Mods = {
 	Functions = require(Modules.UI.Functions),
 	MapLoader = require(Modules.Gameplay.MapLoader),
 	Pages = require(Modules.UI.Pages),
-	Timer = require(Modules.Gameplay.Timer)
+	Timer = require(Modules.Gameplay.Timer),
+	Notice = require(Modules.UI.AccountNotice)
 }
 
 ---------------------------------------

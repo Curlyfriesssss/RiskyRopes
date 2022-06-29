@@ -24,6 +24,7 @@ local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
 local SliderCreator = require(script.Parent.Slider)
 local ColorPicker = require(script.Parent.ColorPicker)
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
+local AccountNotice = require(script.Parent.AccountNotice)
 
 local New = require(script.Parent.WindowCreator)
 
@@ -53,6 +54,8 @@ Robux Spent: R$%s]]
 function PagesModule:UpdateStats()
 	local MyStats = game.ReplicatedStorage.Remotes.GetSelfStats:InvokeServer()
 	local ExtraStats = game.ReplicatedStorage.Remotes.GetSelfData:InvokeServer()
+
+	-- AccountNotice:Display(ExtraStats.AccountNotice)
 
 	Pages.Stats.Stats.Text = (StatsFormat:format(
 		Functions.SecondsToClock(ExtraStats.Playtime),

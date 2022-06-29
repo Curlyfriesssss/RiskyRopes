@@ -83,7 +83,8 @@
 				"GameSettingsAvatar": "R6"
 			},
 			"StarterPlayerScripts": {
-				"$className": "StarterPlayerScripts"
+				"$className": "StarterPlayerScripts",
+				"$path": "src/Client/Player"
 			},
 			"StarterCharacterScripts": {
 				"$className": "StarterCharacterScripts",
