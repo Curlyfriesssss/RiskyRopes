@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@300&display=swap" rel="stylesheet">
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Risky Ropes Moderation</title>
+</head>
+
+<body>
+	<h1>Moderation Actions</h1>
+
+
+	<div id="actions">
+		<div id="userinfo">
+			<h1>LeBoogle</h1>
+			<hr>
+			<div id="modbox">
+
+				<h4>Manage Leaderboard Scores</h4>
+
+				<form>
+					<input type="text" id="mapname" value="roomchan">
+					<label for="mapname">Map Name</label><br>
+					<br>
+					<input type="submit" value="Delete Time">
+				</form>
+			</div>
+			<div id="modbox">
+
+				<h4>Ban User</h4>
+
+				<form id="radiofield">
+					<input type="radio" id="bd_1" name="ban_duration" value="1" checked="Checked">
+					<label for="bd_1">1 Day</label><br>
+					<input type="radio" id="bd_3" name="ban_duration" value="3">
+					<label for="bd_3">3 Days</label><br>
+					<input type="radio" id="bd_7" name="ban_duration" value="7">
+					<label for="bd_7">7 Days</label><br>
+					<input type="radio" id="bd_year" name="ban_duration" value="365">
+					<label for="bd_year">1 Year</label><br>
+					<input type="radio" id="bd_perm" name="ban_duration" value="perm">
+					<label for="bd_perm">Permanent</label><br>
+					<br>
+					<input type="submit" value="Ban">
+				</form>
+			</div>
+			<div id="modbox">
+
+				<h4>Manage Balance</h4>
+
+				<form>
+					<input type="text" id="amount" value="0">
+					<label for="amount">Balance Adjustment</label><br>
+					<br>
+					<input type="submit" value="Adjust Balance">
+				</form>
+			</div>
+		</div>
+
+
+
+
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@ export type WSInfo = {
 
 local Connection = {}
 
-local Base64 = require(script.Parent.Parent.Data.Base64)
+local Base64 = require(script.Parent.Parent.Other.Base64)
 local HTTPS = game:GetService('HttpService')
 local WSInfo: WSInfo = require(script.Parent.WebServerInfo) -- Not included in GitHub for obvious reasons
 

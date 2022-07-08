@@ -13,7 +13,7 @@ local DSSEnabled = pcall(function()
 	DSS:GetDataStore('RandomStore')
 end)
 
-if not DSSEnabled then DSS = require(script.Parent.Data.LocalStores) end
+if not DSSEnabled then DSS = require(script.Parent.Other.LocalStores) end
 
 local PurchaseHistoryStore = DSS:GetDataStore(shared.DatastoreName, 'Purchases')
 

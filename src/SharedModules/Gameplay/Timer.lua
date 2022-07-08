@@ -1,6 +1,7 @@
-local Timer = {}
-
 local RS = game:GetService('RunService')
+
+
+local Timer = {}
 
 local RUNNING, PAUSED, STOPPED = 1,2,3
 

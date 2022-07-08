@@ -31,7 +31,7 @@ function _Init()
 	---------------------------------------
 	Mods = {
 		Music = require(ModulesFolder.Music),
-		Account = require(ModulesFolder.Data.Account),
+		Account = require(ModulesFolder.Other.Account),
 		Remotes = require(ModulesFolder.Networking.Remotes),
 		Purchase = require(ModulesFolder.PurchaseHandler),
 		WebServer = require(ModulesFolder.Networking.WebServer)
@@ -47,7 +47,7 @@ function _Init()
 			Music:Next()
 			Music:Play()
 
-			repeat wait() until not Music.MusicObject.Playing
+			repeat task.wait() until not Music.MusicObject.Playing
 		end
 	end)()
 	
@@ -55,7 +55,7 @@ function _Init()
 		local LS = Instance.new('Folder')
 		LS.Name = 'leaderstats'
 		LS.Parent = Player
-		
+
 		UserAccounts[Player] = Mods.Account.get(Player)
 		
 		for _, L in ipairs(Leaderstats) do
@@ -63,7 +63,7 @@ function _Init()
 			T.Name = L
 			T.Parent = LS
 		end
-
+ 
 		
 	end)
 	

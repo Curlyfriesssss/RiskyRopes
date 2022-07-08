@@ -92,7 +92,7 @@ function updateParams()
 end
 
 function EyeTrace()
-	pcall(updateParams()) -- Update raycast filter without errors, just incase map doesn't exist
+	pcall(updateParams) -- Update raycast filter without errors, just incase map doesn't exist
 	
 	local Result = workspace:Raycast(Camera.CFrame.Position,Camera.CFrame.LookVector * CAST_DISTANCE, RayParams)
 	
