@@ -11,7 +11,7 @@ function ApplyProperty(Object: GuiObject, PropertyValue: string)
 	
 	local PossibleKeys = {'Text','Image'}
 	
-	for _, Key in pairs(PossibleKeys) do
+	for _, Key in PossibleKeys do
 		if HasProperty(Object,Key) then
 			KeyToEdit = Key
 			break
@@ -28,7 +28,7 @@ return function(ClassName: string)
 	local Window: Frame = game.ReplicatedStorage.UI[ClassName]:Clone()
 	
 	return function(Properties: {})
-		for _, Object: GuiObject in pairs(Window:GetDescendants()) do
+		for _, Object: GuiObject in Window:GetDescendants() do
 			if Properties[Object.Name] then
 				ApplyProperty(Object,Properties[Object.Name])
 			end

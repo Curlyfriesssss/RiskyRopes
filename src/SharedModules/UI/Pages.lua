@@ -69,7 +69,7 @@ function PagesModule:UpdateStats()
 end
 
 function PagesModule:loadMapList()
-	for K, Diff: string in pairs(MapData.Diff) do
+	for K, Diff: string in MapData.Diff do
 		local MapLabel = UIFolder.MapLabel:Clone()
 		MapLabel.Parent = Pages.Play.MapMenu
 		MapLabel.Text = Diff
@@ -84,7 +84,7 @@ function PagesModule:loadMapList()
 		
 		local MapCount = 0
 		
-		for MapName, MapInfo in pairs(MapData) do
+		for MapName, MapInfo in MapData do
 			-- Makes sure the current iteration is a map and we have the map folder for it.
 			if MapName ~= 'Diff' and MapsFolder:FindFirstChild(MapName) then
 				if MapInfo.Difficulty == K then
@@ -108,7 +108,7 @@ function PagesModule:loadMapList()
 					
 					coroutine.wrap(function()
 						if type(MapInfo.Author) == 'table' then
-							for K, ID: number in pairs(MapInfo.Author) do
+							for K, ID: number in MapInfo.Author do
 								local N = game.Players:GetNameFromUserIdAsync(ID)
 								AuthorString = AuthorString .. N
 								if K ~= #MapInfo.Author then
@@ -188,7 +188,7 @@ local SettingTypesFunc = {
 }
 
 function PagesModule:LoadSettings()
-	for SettingInternalName, Setting in pairs(shared.Settings) do
+	for SettingInternalName, Setting in shared.Settings do
 		local S = game.ReplicatedStorage.UI.Setting:Clone()
 		local SType = typeof(Setting.Default)
 		if SType == 'table' then SType = typeof(Setting.Default[1]) end

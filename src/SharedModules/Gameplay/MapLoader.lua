@@ -18,7 +18,7 @@ function mapLoader:ClearLighting()
 		workspace.Terrain.Clouds:Destroy()
 	end)
 	
-	for _, Object in pairs(game.Lighting:GetChildren()) do
+	for _, Object in game.Lighting:GetChildren() do
 		if Object:IsA('Sky') or Object:IsA('Atmosphere') then
 			Object:Destroy()
 		end
@@ -26,7 +26,7 @@ function mapLoader:ClearLighting()
 end
 
 function mapLoader:LoadLighting(LightingFolder: Folder)
-	for _, Object in pairs(LightingFolder:GetChildren()) do
+	for _, Object in LightingFolder:GetChildren() do
 		if Object:IsA('ValueBase') then
 			game.Lighting[Object.Name] = Object.Value
 		elseif Object:IsA('Clouds') then
@@ -64,13 +64,13 @@ function mapLoader:load(MapName: string)
 	self.LoadedModules = {}
 	
 	-- Load Modules
-	for _, Mod: ModuleScript in pairs(MapObject:GetDescendants()) do
+	for _, Mod: ModuleScript in MapObject:GetDescendants() do
 		if Mod:IsA('ModuleScript') then
 			table.insert(self.LoadedModules, require(Mod))
 		end
 	end
 	
-	for _, v: BasePart | SpawnLocation in pairs(MapObject:GetDescendants()) do
+	for _, v: BasePart | SpawnLocation in MapObject:GetDescendants() do
 		if v:IsA('SpawnLocation') then
 			self.CurrentSpawn = v
 			break
