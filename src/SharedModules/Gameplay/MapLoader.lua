@@ -74,11 +74,6 @@ function mapLoader:load(MapName: string)
 		if v:IsA('SpawnLocation') then
 			self.CurrentSpawn = v
 			break
-		-- dyrex mode one day
-		
-		-- elseif v:IsA("BasePart") then 
-		-- 	v.Material = Enum.Material.Foil
-		-- 	v.MaterialVariant = 'Dyrex'
 		end
 	end
 	

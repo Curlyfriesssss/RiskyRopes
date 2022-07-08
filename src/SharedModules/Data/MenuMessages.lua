@@ -7,7 +7,6 @@ return {
     "SBB1 is a really cool.",
     "young jit likes hamburgers",
     "Hi!",
-    "Dyrex is such a goofy goober",
     "Safety Strings is a better game",
     "Aquatic Ambience is a bop",
     "Raining dogs and cats",

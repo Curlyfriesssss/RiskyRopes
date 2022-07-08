@@ -1,5 +1,4 @@
 -- god bless cmandeep4141
--- holy shit dyrex is so smexy and cute
 -- Open source users wont have literally any of these maps besides RoomChan
 
 return {
