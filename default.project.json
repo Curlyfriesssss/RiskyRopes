@@ -12,6 +12,11 @@
 				"$path": "models"
 			}
 		},
+		"HttpService": {
+			"$properties": {
+				"HttpEnabled": true
+			}
+		},
 		"Players": {
 			"$className": "Players",
 			"$properties": {

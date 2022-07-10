@@ -243,7 +243,7 @@ function GetUsername(UserId: number)
 			NameCache[UserId] = Players:GetNameFromUserIdAsync(UserId)
 		end)
 		if not suc then
-			task.wait(3)
+			task.wait(5.25)
 		end
 	until suc
 	PendingNames -= 1
