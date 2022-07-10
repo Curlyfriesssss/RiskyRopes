@@ -43,11 +43,11 @@ def _():
     return jsonify({'Message': 'OK'}), 200
 
 
-@app.route('/api/leaderboard/<Map>',defaults={'Limit': 100})
+@app.route('/api/leaderboard/<Map>', defaults={'Limit': 100})
 @app.route('/api/leaderboard/<Map>/<Limit>')
-def leaderboard(Map,Limit):
+def leaderboard(Map, Limit):
     Map = Map.lower()
-	
+
     if request.method == 'GET':
         Cursor = mysql.connection.cursor()
 

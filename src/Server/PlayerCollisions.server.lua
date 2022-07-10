@@ -26,10 +26,14 @@ end
 
 local function resetCollisionGroup(object)
 	local previousCollisionGroupId = previousCollisionGroups[object]
-	if not previousCollisionGroupId then return end 
+	if not previousCollisionGroupId then
+		return
+	end
 
 	local previousCollisionGroupName = PhysicsService:GetCollisionGroupName(previousCollisionGroupId)
-	if not previousCollisionGroupName then return end
+	if not previousCollisionGroupName then
+		return
+	end
 
 	PhysicsService:SetPartCollisionGroup(object, previousCollisionGroupName)
 	previousCollisionGroups[object] = nil

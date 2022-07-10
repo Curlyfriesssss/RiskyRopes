@@ -1,17 +1,17 @@
 {
-    "ClassName": "Folder",
-    "Children": [
-      {
-        "Name": "GetSelfData",
-        "ClassName": "RemoteFunction"
-      },
-      {
-        "Name": "GetSelfStats",
-        "ClassName": "RemoteFunction"
-      },
-	  {
-		"Name": "GetLeaderboard",
-		"ClassName": "RemoteFunction"
-	  }
-    ]
-  }
+	"ClassName": "Folder",
+	"Children": [
+		{
+			"Name": "GetSelfData",
+			"ClassName": "RemoteFunction"
+		},
+		{
+			"Name": "GetSelfStats",
+			"ClassName": "RemoteFunction"
+		},
+		{
+			"Name": "GetLeaderboard",
+			"ClassName": "RemoteFunction"
+		}
+	]
+}

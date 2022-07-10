@@ -1,9 +1,8 @@
-local RS = game:GetService('RunService')
-
+local RS = game:GetService("RunService")
 
 local Timer = {}
 
-local RUNNING, PAUSED, STOPPED = 1,2,3
+local RUNNING, PAUSED, STOPPED = 1, 2, 3
 
 Timer.StartTick = 0
 Timer.CurrentTime = 0
@@ -32,5 +31,4 @@ function Timer:Pause()
 	Timer.State = PAUSED
 end
 
-
-return setmetatable({}, {__index = Timer})
+return setmetatable({}, { __index = Timer })

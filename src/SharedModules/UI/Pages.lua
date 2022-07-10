@@ -234,8 +234,8 @@ function GetUsername(UserId: number)
 	if NameCache[UserId] then
 		return NameCache[UserId]
 	end
-	NameCache[UserId] = 'Still Pending'
-	
+	NameCache[UserId] = "Still Pending"
+
 	local suc
 	PendingNames += 1
 	repeat
@@ -256,7 +256,9 @@ local LeaderboardCooldown = false
 local CooldownTime = 0.50
 
 function LoadLeaderboard(MapName: string)
-	if LeaderboardCooldown then return end
+	if LeaderboardCooldown then
+		return
+	end
 	LeaderboardCooldown = true
 
 	ClearLeaderboard()
@@ -266,7 +268,7 @@ function LoadLeaderboard(MapName: string)
 	for Index, ThisResult in Result do
 		if ThisResult.userid then
 			local LUser = New("LUser")({
-				Username = '?',
+				Username = "?",
 				Score = ("%0.3f"):format(ThisResult.score / 1000),
 				Headshot = Functions.QuickAvatar(ThisResult.userid),
 				Position = ("#%01d"):format(Index + if PageNumber > 1 then PageNumber * 100 else 0),
@@ -289,14 +291,14 @@ function LoadLeaderboard(MapName: string)
 			LUser.Parent = Pages.Leaderboards.Leaderboard
 
 			task.spawn(function()
-				LUser.Main.RealMain.Username.Text =  GetUsername(ThisResult.userid)
+				LUser.Main.RealMain.Username.Text = GetUsername(ThisResult.userid)
 			end)
 		end
 	end
 
 	task.spawn(function()
 		task.wait(CooldownTime)
-		LeaderboardCooldown = false 
+		LeaderboardCooldown = false
 	end)
 end
 
@@ -318,18 +320,17 @@ function PagesModule:LoadLeaderboards()
 
 			Button.MapName.MouseButton1Click:Connect(function()
 				PageNumber = 1
-				Counter.Text = '1'
+				Counter.Text = "1"
 				CurrentMap = MapName
 				LoadLeaderboard(MapName)
-				
 			end)
 		end
 	end
 
-	
-
 	local function UpdatePageNumber(Amount: number)
-		if LeaderboardCooldown then return end
+		if LeaderboardCooldown then
+			return
+		end
 
 		local OldPNumber = PageNumber
 
@@ -339,7 +340,9 @@ function PagesModule:LoadLeaderboards()
 
 		Counter.Text = PageNumber
 
-		if PageNumber ~= OldPNumber then LoadLeaderboard(CurrentMap) end
+		if PageNumber ~= OldPNumber then
+			LoadLeaderboard(CurrentMap)
+		end
 	end
 
 	Next.MouseButton1Click:Connect(function()

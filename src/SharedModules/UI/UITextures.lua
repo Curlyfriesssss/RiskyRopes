@@ -1,6 +1,6 @@
 return {
 	Checkbox = {
-		On = 'rbxassetid://9915327864',
-		Off = 'rbxassetid://9915326354'
-	}
+		On = "rbxassetid://9915327864",
+		Off = "rbxassetid://9915326354",
+	},
 }

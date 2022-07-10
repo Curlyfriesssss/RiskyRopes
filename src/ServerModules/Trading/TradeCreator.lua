@@ -5,11 +5,11 @@ function TradeCreator.new()
 	local self = {}
 
 	self.Users = {}
-	self.Items = {{},{}}
-	
+	self.Items = { {}, {} }
+
 	self.Date = os.time()
-	
-	return setmetatable(self, {__index = Trade})
+
+	return setmetatable(self, { __index = Trade })
 end
 
 function Trade:AssignUser(UserIndex: number, UserId: number)

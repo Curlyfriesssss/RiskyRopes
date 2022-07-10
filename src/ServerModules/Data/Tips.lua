@@ -1,3 +1,3 @@
 return {
-	"Go like the game and favorite it!"
+	"Go like the game and favorite it!",
 }

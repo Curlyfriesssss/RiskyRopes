@@ -3,7 +3,4 @@ local Players = game:GetService("Players")
 
 local ChatTag = {}
 
-
-
-
 return ChatTag

@@ -8,7 +8,7 @@ function GenerateChatTag(Message: string, Color: Color3)
 	local G = math.ceil(Color.G * 255)
 	local B = math.ceil(Color.B * 255)
 
-	return Output:format(R,G,B,Message)
+	return Output:format(R, G, B, Message)
 end
 
 TextChatService.OnIncomingMessage = function(Message: TextChatMessage)
@@ -21,11 +21,9 @@ TextChatService.OnIncomingMessage = function(Message: TextChatMessage)
 		local ChatTagColor = Player:GetAttribute("ChatTagColor")
 
 		if ChatTag then
-			Props.PrefixText = GenerateChatTag(ChatTag,ChatTagColor) .. Message.PrefixText
+			Props.PrefixText = GenerateChatTag(ChatTag, ChatTagColor) .. Message.PrefixText
 		end
-
-	end	
-
+	end
 
 	return Props
 end
