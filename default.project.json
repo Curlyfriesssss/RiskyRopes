@@ -7,9 +7,6 @@
 			"$path": "storage",
 			"Modules": {
 				"$path": "src/SharedModules"
-			},
-			"Models": {
-				"$path": "models"
 			}
 		},
 		"HttpService": {

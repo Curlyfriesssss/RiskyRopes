@@ -47,10 +47,24 @@ local function generateRequest(page: string, method: string, body: table)
 	}
 end
 
+function DoRequest(Request: table)
+	local Success, Result = pcall(function()
+		return HTTPS:RequestAsync(Request)
+	end)
+
+	return Result
+end
+
 function Connection:Get(Page: string)
 	local Request = generateRequest(Page, "GET")
 
-	return HTTPS:RequestAsync(Request)
+	return DoRequest(Request)
+end
+
+function Connection:Post(Page: string, Body: any)
+	local Request = generateRequest(Page, "POST")
+
+	return DoRequest(Request)
 end
 
 self = { URL = BaseURL, Authorization = Authorization }

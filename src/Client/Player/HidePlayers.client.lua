@@ -21,21 +21,25 @@ end
 Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
 	local Players = Players:GetPlayers()
 
-	if #Players == 0 then
+	if #Players <= 1 then
 		return
 	end
+
 	local MyPosition = Camera.CFrame.Position
 
 	for _, Player in Players do
-		if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
-			local PlayerPosition = Player.Character:FindFirstChild("HumanoidRootPart").Position
-			local Distance = (MyPosition - PlayerPosition).Magnitude
+		if Player.Character then
+			local Root = Player.Character:FindFirstChild("HumanoidRootPart")
+			if Root then
+				local PlayerPosition = Root.Position
+				local Distance = (MyPosition - PlayerPosition).Magnitude
 
-			if Distance >= shared.Settings.bubble_radius.Default[1].Max then
-				continue
+				if Distance >= shared.Settings.bubble_radius.Default[1].Max then
+					continue
+				end
+
+				HideCharacter(Player.Character, Distance)
 			end
-
-			HideCharacter(Player.Character, Distance)
 		end
 	end
 end)

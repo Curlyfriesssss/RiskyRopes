@@ -26,7 +26,7 @@ return setmetatable(
 					shared.Functions.XPToLVL(MyData.XP),
 					shared.Functions.CommaValue(MyData.XP)
 				)
-				TopBar.Money.Text = ("$%s"):format(shared.Functions.CommaValue(MyData.Cash))
+				TopBar.Money.Text = ("$%s"):format(shared.Functions.CommaValue(MyData.Balance))
 				TopBar.Username.Text = ("@%s"):format(game.Players.LocalPlayer.Name)
 			end,
 		},

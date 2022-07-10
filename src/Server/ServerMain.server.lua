@@ -57,7 +57,7 @@ function _Init()
 		LS.Name = "leaderstats"
 		LS.Parent = Player
 
-		UserAccounts[Player] = Mods.Account.get(Player)
+		UserAccounts[Player] = Mods.Account:get(Player)
 
 		for _, L in Leaderstats do
 			local T = Instance.new("NumberValue")

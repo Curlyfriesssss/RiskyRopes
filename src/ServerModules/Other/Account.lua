@@ -1,75 +1,57 @@
-local DSS: DataStoreService = game:GetService("DataStoreService")
-
 export type Account = {
+	ID: number,
+	Balance: number,
 	XP: number,
 	Wins: number,
-	Cash: number,
+	Inventory: string | table,
+	Ropes: number,
+	Networth: number,
 	Playtime: number,
-	AccountNotice: { Title: string, Message: string, State: boolean },
 }
 
-local account = {}
-local MT = { __index = account }
+local HTTPS = game:GetService("HttpService")
 
-local DSSEnabled = pcall(function()
-	DSS:GetDataStore("RandomStore")
-end)
+local Networking = script.Parent.Parent.Networking
+local WebServer = require(Networking.WebServer)
 
-local KeyFormat: string = shared.KeyFormat
+local KickMessage = "\n" .. "It appears the web server for Risky Ropes is currently down, please check back later."
 
-if not DSSEnabled then
-	DSS = require(script.Parent.LocalStores)
-end
-
-local Datastores = {
-	Accounts = DSS:GetDataStore(shared.DatastoreName, "Accounts"),
+local Account = {}
+local self = {
+	LoadedAccounts = {},
 }
 
-local LoadedAccounts = {}
+Account.__index = Account
 
-function account:getData()
-	return {
-		XP = self.XP,
-		Wins = self.Wins,
-		Cash = self.Cash,
-		Ranking = self.Ranking,
-		Playtime = self.Playtime,
-		Ropes = self.Ropes,
-		Networth = 0,
-		AccountNotice = self.AccountNotice,
-	}
-end
+function Account:get(Player: Player, KickIfFail: boolean)
+	local PossibleData: Account = WebServer:Get(("/api/profile/%s"):format(Player.UserId))
 
-function new()
-	local self = {
-		XP = 0,
-		Ranking = 0,
-		Wins = 0,
-		Networth = 0,
-		Ropes = 0,
+	if PossibleData == "HttpError: ConnectFail" then -- HTTP failed, indicating the server is down
+		Player:Kick(KickMessage)
+		return
+	end
 
-		Cash = 0, -- Starting Money
-		Playtime = 0,
-		AccountNotice = { {
-			Title = "test",
-			Content = "hello boogle man",
-		} },
-		Notifications = {},
-	}
+	if PossibleData.StatusCode == 404 then -- Player does not have an account.
+		if KickIfFail then
+			Player:Kick(KickMessage)
+		end
 
-	return setmetatable(self, MT)
-end
+		return self:create(Player)
+	end
 
-function account.get(Player: Player)
-	local Key = KeyFormat:format(Player.UserId)
+	PossibleData = HTTPS:JSONDecode(PossibleData.Body)
 
-	local PossibleData = Datastores.Accounts:GetAsync(Key) or new()
-
-	LoadedAccounts[account] = PossibleData
+	self.LoadedAccounts[Player] = PossibleData
 
 	return PossibleData
 end
 
-function account:save() end
+function Account:create(Player: Player)
+	local Result = WebServer:Post(("/api/profile/%s"):format(Player.UserId))
 
-return account
+	return self:get(Player, true)
+end
+
+setmetatable(self, Account)
+
+return self

@@ -18,7 +18,7 @@ return function(ImportantData)
 			repeat
 				task.wait()
 			until tick() > TO or UserAccounts[Player]
-			return UserAccounts[Player]:getData()
+			return UserAccounts[Player]
 		end,
 
 		[Remotes.GetSelfStats] = function(Player: Player)
