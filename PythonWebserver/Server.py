@@ -20,7 +20,7 @@ import logging
 logs = logging.getLogger('werkzeug')
 logs.setLevel(logging.ERROR)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='Templates',static_folder='files')
 
 # config the mysql stuff
 with open("ServerInfo.json") as file:
@@ -32,7 +32,18 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 
+@app.route('/files/<path:path>/')
+def static_file(path):
+	return app.send_static_file(path),200
+
+@app.route("/moderator", methods=['GET','POST'])
+def moderator():
+	if request.method == 'GET':
+		return render_template('Moderation.html')
+		
+
 # API Start
+
 
 
 @app.route('/api/')
