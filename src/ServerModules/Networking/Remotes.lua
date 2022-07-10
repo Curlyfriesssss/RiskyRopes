@@ -34,12 +34,12 @@ return function(ImportantData)
 			
 			return Stats
 		end,
-		[Remotes.GetLeaderboard] = function(Player: Player, MapName: string)
+		[Remotes.GetLeaderboard] = function(Player: Player, MapName: string, Page: number)
 			local Leaderboards = LoadedModules.Leaderboards
 			
 			local LeaderboardSize = 100
 
-			local FetchedData = Leaderboards:Get(MapName:lower():gsub("%s","_"), LeaderboardSize)
+			local FetchedData = Leaderboards:Get(MapName:lower():gsub("%s","_"), LeaderboardSize, Page or 0)
 
 			return HTTPS:JSONDecode(FetchedData.Body)
 		end
