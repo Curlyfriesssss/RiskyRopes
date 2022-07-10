@@ -43,15 +43,28 @@ def _():
 	return jsonify({'Message': 'OK'}), 200
 
 
-@app.route('/api/leaderboard/<Map>', defaults={'Limit': 100})
-@app.route('/api/leaderboard/<Map>/<Limit>')
+@app.route("/api/leaderboard/<Map>", methods=['GET'], defaults={'Limit': 100})
+@app.route("/api/leaderboard/<Map>/<Limit>", methods=['GET'])
 def leaderboard(Map, Limit):
+	"""
+	Risky Ropes API Call
+	Returns the JSON data for a leaderboard
+	"""
+	Page = request.args.get('page')
+
+	if not Page:
+		Page = 0
+
+	Page = int(Page)
+
 	Map = Map.lower()
 
+	Limit = int(Limit)
 	if request.method == 'GET':
-		Cursor = mysql.connection.cursor()
+		cursor = mysql.connection.cursor()
 
-		Cursor.execute(f"SELECT * FROM {Map} ORDER BY score  LIMIT {Limit}; ")
+		cursor.execute(
+			f"SELECT * FROM {Map} ORDER BY score  LIMIT {(Page * Limit)}, {Limit}; ")
 		result = list(cursor.fetchall())
 		i = 1
 		for pos in result:
@@ -67,19 +80,47 @@ def leaderboard(Map, Limit):
 		mysql.connection.commit()
 
 		return jsonify(result), 200
+	elif request.method == 'POST':
+		cursor = mysql.connection.cursor()
+		cursor.execute(f""" 
+		CREATE TABLE `riskyropes`.`{Map}` (
+		`userid` INT NOT NULL,
+		`score` INT NOT NULL DEFAULT 0,
+		PRIMARY KEY (`userid`),
+		UNIQUE INDEX `userid_UNIQUE` (`userid` ASC) VISIBLE);
+		""")
+		mysql.connection.commit()
+		return {"Success": True}, 200
 
-@app.route('/api/profile/<UserId>')
+
+@app.route('/api/profile/<UserId>', methods=['GET','POST'])
 def profile(UserId):
 	Cursor = mysql.connection.cursor()
 
 	if request.method == 'GET':
 		Cursor.execute(f"SELECT * from accountdata WHERE ID = {UserId}")
 
-		AccountData = cursor.fetchall()
-
+		AccountData = Cursor.fetchall()
+		if len(AccountData) == 0:
+			return jsonify("Profile does not exist"),404
 		mysql.connection.commit()
 
-		return jsonify(AccountData)
+		return jsonify(AccountData[0])
+	elif request.method == 'POST':
+		Cursor.execute(f"""INSERT INTO accountdata
+(`ID`,
+`Balance`,
+`XP`,
+`Wins`,
+`Inventory`,
+`Ropes`,
+`Networth`,
+`Playtime`)
+VALUES({UserId},0,0,0,'[]',0,0,0);""")
+
+		mysql.connection.commit()
+		return 'Success',200
+
 
 if __name__ == '__main__':
 
