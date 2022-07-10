@@ -6,6 +6,7 @@ local self = {}
 
 local TS = game:GetService('TweenService')
 local Players = game:GetService('Players')
+local RunService = game:GetService('RunService')
 local UIS = game:GetService('UserInputService')
 
 local Player = game.Players.LocalPlayer
@@ -246,8 +247,14 @@ function LoadLeaderboard(MapName: string)
 				}
 				LUser.LayoutOrder = ThisResult.score
 				
-				if Index == 1 then
-					-- RGB color thingy
+				if Index == 1 then -- First score in leaderboard
+					local C; C =RunService.RenderStepped:Connect(function()
+						LUser.BackgroundColor3 = Color3.fromHSV(tick() % 10 / 10, 1, 1)
+					end)
+
+					LUser.Destroying:Connect(function() -- Not sure this is needed or not, but just incase.
+						C:Disconnect()
+					end)
 				elseif ThisResult.userid == Player.UserId then
 					LUser.BackgroundColor3 = Color3.new(0.584313, 0.082352, 0.768627)
 				end
