@@ -8,6 +8,8 @@ local TS = game:GetService('TweenService')
 local Players = game:GetService('Players')
 local UIS = game:GetService('UserInputService')
 
+local Player = game.Players.LocalPlayer
+
 local Functions = require(script.Parent.Functions)
 local Remotes = game.ReplicatedStorage.Remotes
 
@@ -243,7 +245,13 @@ function LoadLeaderboard(MapName: string)
 					Headshot = Functions.QuickAvatar(ThisResult.userid)
 				}
 				LUser.LayoutOrder = ThisResult.score
-		
+				
+				if Index == 1 then
+					-- RGB color thingy
+				elseif ThisResult.userid == Player.UserId then
+					LUser.BackgroundColor3 = Color3.new(0.584313, 0.082352, 0.768627)
+				end
+
 				LUser.Parent = Pages.Leaderboards.Leaderboard				
 			end)
 		end

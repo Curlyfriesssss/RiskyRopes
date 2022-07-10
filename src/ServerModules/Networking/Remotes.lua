@@ -39,7 +39,7 @@ return function(ImportantData)
 			
 			local LeaderboardSize = 100
 
-			local FetchedData = Leaderboards:Get(MapName, LeaderboardSize)
+			local FetchedData = Leaderboards:Get(MapName:lower():gsub("%s","_"), LeaderboardSize)
 
 			return HTTPS:JSONDecode(FetchedData.Body)
 		end
