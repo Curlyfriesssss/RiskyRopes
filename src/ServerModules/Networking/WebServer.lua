@@ -1,15 +1,17 @@
-export type WSInfo = {
-	URL: string,
-	Authorization: {U: string, P:string}
-}
+export type WSInfo = {URL: string, Authorization: {U: string, P:string}}
 
-local Connection = {}
+local HTTPS = game:GetService('HttpService')
 
 local Base64 = require(script.Parent.Parent.Other.Base64)
-local HTTPS = game:GetService('HttpService')
 local WSInfo: WSInfo = require(script.Parent.WebServerInfo) -- Not included in GitHub for obvious reasons
 
-local BaseURL, Authorization
+local Connection = {}
+local self = {}
+
+Connection.__index = Connection
+
+local BaseURL
+local Authorization
 
 local function dprint(msg: string)
 	warn('[WEB-SERVER] ' .. msg)
@@ -42,8 +44,15 @@ local function generateRequest(page: string, method: string, body: table)
 	}
 end
 
-function Connection:test()
-	
+function Connection:Get(Page: string)
+	local Request = generateRequest(Page, 'GET')
+
+
+	return HTTPS:RequestAsync(Request)
 end
 
-return setmetatable({URL = BaseURL, Authorization = Authorization}, {__index = Connection})
+self = {URL = BaseURL, Authorization = Authorization}
+
+setmetatable(self, Connection)
+
+return self

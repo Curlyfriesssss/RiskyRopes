@@ -46,7 +46,7 @@ function purchase:GetRobuxSpent(UserId: number)
 	local RobuxSpent = 0
 	local PurchaseCount = #PurchaseHistory
 	
-	for _, Purchase: ShortReceipt in ipairs(PurchaseHistory or {}) do
+	for _, Purchase: ShortReceipt in PurchaseHistory or {} do
 		RobuxSpent += Purchase.Spent or 0
 	end
 	

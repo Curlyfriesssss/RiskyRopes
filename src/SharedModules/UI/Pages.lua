@@ -5,6 +5,7 @@ local PagesModule = {}
 local self = {}
 
 local TS = game:GetService('TweenService')
+local Players = game:GetService('Players')
 local UIS = game:GetService('UserInputService')
 
 local Functions = require(script.Parent.Functions)
@@ -217,20 +218,36 @@ function ClearLeaderboard()
 	end
 end
 
+
+local NameCache = {}
+
+function GetUsername(UserId: number)
+	if NameCache[UserId] then return NameCache[UserId] end
+
+	NameCache[UserId] = Players:GetNameFromUserIdAsync(UserId)
+
+	return NameCache[UserId]
+end
+
 function LoadLeaderboard(MapName: string)
 	ClearLeaderboard()
 
 	local Result = Remotes.GetLeaderboard:InvokeServer(MapName)
 	
 	for Index, ThisResult in Result do
-		local LUser = New "LUser" {
-			Username = ThisResult.User,
-			Score = ThisResult.Score,
-			Headshot = Functions.QuickAvatar(ThisResult.User)
-		}
-		LUser.LayoutOrder = ThisResult.Score
-
-		LUser.Parent = Pages.Leaderboards.Leaderboard
+		if ThisResult.userid then
+			task.spawn(function()
+				local LUser = New "LUser" {
+					Username = GetUsername(ThisResult.userid),
+					Score = ThisResult.score,
+					Headshot = Functions.QuickAvatar(ThisResult.userid)
+				}
+				LUser.LayoutOrder = ThisResult.score
+		
+				LUser.Parent = Pages.Leaderboards.Leaderboard				
+			end)
+		end
+		
 	end
 
 end

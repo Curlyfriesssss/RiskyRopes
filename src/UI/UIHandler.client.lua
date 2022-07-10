@@ -3,7 +3,7 @@ shared.UI = script.Parent
 -- Clone UI from UI model in storage
 local UIFolder = game.ReplicatedStorage.UI.Init
 
-for _, Frame: Frame in pairs(UIFolder:GetChildren()) do
+for _, Frame: Frame in UIFolder:GetChildren() do
 	local C = Frame:Clone()
 	C.Parent = shared.UI
 end
@@ -73,6 +73,10 @@ function MoveToSpawn(C: Model)
 	end)
 end
 
+function RandomizeWelcomeMessage()
+	
+end
+
 function WaitForMove()
 
 	-- Definitely need to improve upon this method eventually.
@@ -111,7 +115,7 @@ function Init()
 	Mods.Pages:LoadSettings()
 	Mods.Pages:LoadLeaderboards()
 	
-	for _, Button: GuiButton in pairs(Menu.TopBar.Selection:GetChildren()) do
+	for _, Button: GuiButton in Menu.TopBar.Selection:GetChildren() do
 		if Button:IsA('GuiButton') then
 			Button.MouseButton1Click:Connect(function()
 				Menu.Pages.UIPageLayout:JumpTo(Menu.Pages:FindFirstChild(Button.Name))

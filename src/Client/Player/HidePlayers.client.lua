@@ -10,7 +10,7 @@ function HideCharacter(Character: Model, Distance: number)
 	local NewTransparency = 1 - map(Distance, MyRadius, MyRadius*2, 0, 1)
 
 	coroutine.wrap(function()
-		for _, BasePart: BasePart in ipairs(Character:GetDescendants()) do
+		for _, BasePart: BasePart in Character:GetDescendants() do
 			if (BasePart:IsA("BasePart") or BasePart:IsA("Decal")) and BasePart.Name ~= 'HumanoidRootPart' then
 				BasePart.Transparency = NewTransparency
 			end
@@ -25,7 +25,7 @@ Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
 	if #Players == 0 then return end
 	local MyPosition = Camera.CFrame.Position
 
-	for _, Player in ipairs(Players) do
+	for _, Player in Players do
 		if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
 			local PlayerPosition = Player.Character:FindFirstChild("HumanoidRootPart").Position
 			local Distance = (MyPosition - PlayerPosition).Magnitude

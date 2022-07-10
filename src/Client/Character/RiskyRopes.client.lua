@@ -38,7 +38,7 @@ local RayParams = RaycastParams.new(); RayParams.FilterType = Enum.RaycastFilter
 -- end
 
 function WipeObjects()
-	for _, Obj: Instance in pairs(Objects) do
+	for _, Obj: Instance in Objects do
 		if Obj:IsA(FORCE_TYPE) then
 			task.spawn(function() -- Crappy method to insure the force is deleted .25 seconds after we let go of our rope
 				task.wait(0.250)

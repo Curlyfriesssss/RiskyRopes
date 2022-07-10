@@ -34,7 +34,8 @@ function _Init()
 		Account = require(ModulesFolder.Other.Account),
 		Remotes = require(ModulesFolder.Networking.Remotes),
 		Purchase = require(ModulesFolder.PurchaseHandler),
-		WebServer = require(ModulesFolder.Networking.WebServer)
+		WebServer = require(ModulesFolder.Networking.WebServer),
+		Leaderboards = require(ModulesFolder.Networking.Leaderboards)
 	}
 
 	-- Music Player
@@ -58,7 +59,7 @@ function _Init()
 
 		UserAccounts[Player] = Mods.Account.get(Player)
 		
-		for _, L in ipairs(Leaderstats) do
+		for _, L in Leaderstats do
 			local T = Instance.new('NumberValue')
 			T.Name = L
 			T.Parent = LS

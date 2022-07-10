@@ -19,7 +19,7 @@ end
 local function setCollisionGroupRecursive(object)
 	setCollisionGroup(object)
 
-	for _, child in ipairs(object:GetChildren()) do
+	for _, child in object:GetChildren() do
 		setCollisionGroupRecursive(child)
 	end
 end

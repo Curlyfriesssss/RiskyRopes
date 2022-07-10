@@ -1,3 +1,5 @@
+local HTTPS = game:GetService("HttpService")
+
 return function(ImportantData)
 	local LoadedModules = ImportantData.Mods
 	local UserAccounts = ImportantData.UserAccounts
@@ -33,21 +35,17 @@ return function(ImportantData)
 			return Stats
 		end,
 		[Remotes.GetLeaderboard] = function(Player: Player, MapName: string)
-			local FakeResult = {}
+			local Leaderboards = LoadedModules.Leaderboards
+			
+			local LeaderboardSize = 100
 
-			for i = 1, 100 do
-				table.insert(FakeResult, {
-					User = if math.random(1,2) == 1 then 1551878098 else 41372847,
-					Score = math.random(7100,20000)
-				}
-			)
-			end
+			local FetchedData = Leaderboards:Get(MapName, LeaderboardSize)
 
-			return FakeResult
+			return HTTPS:JSONDecode(FetchedData.Body)
 		end
 	}
 	
-	for Remote, FunctionToRun in pairs(RemotesToFunctions) do
+	for Remote, FunctionToRun in RemotesToFunctions do
 		if Remote:IsA('RemoteEvent') then
 			Remote.OnServerEvent:Connect(FunctionToRun)
 		elseif Remote:IsA('RemoteFunction') then
