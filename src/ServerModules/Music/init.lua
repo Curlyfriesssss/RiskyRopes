@@ -34,6 +34,8 @@ function Music:Last()
 end
 
 function Music:Play()
+	self.MusicObject.TimePosition = 0
+
 	self.Status = "Playing"
 
 	local TrackToPlay = self:GetTrack()
@@ -45,7 +47,7 @@ function Music:Play()
 	self.MusicObject.SoundId = TrackToPlay.ID
 	self.MusicObject.PlaybackSpeed = TrackToPlay.Speed or 1
 
-	self.MusicObject.Playing = true
+	self.MusicObject:Play()
 end
 
 function Music:Pause()

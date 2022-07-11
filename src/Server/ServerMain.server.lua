@@ -49,6 +49,7 @@ function _Init()
 			repeat
 				task.wait()
 			until not Music.MusicObject.Playing
+			print('Finished song')
 			Music:Stop()
 			task.wait(0.50)
 		end
