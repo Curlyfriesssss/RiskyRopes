@@ -5,4 +5,6 @@ function createTrack(ID: number, PlaybackSpeed: number)
 	}
 end
 
-return {}
+return {
+	createTrack(10186199663, 1)
+}

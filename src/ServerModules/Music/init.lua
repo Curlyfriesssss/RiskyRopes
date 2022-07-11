@@ -3,7 +3,7 @@ local self = {}
 
 self.Playlist = require(script.Playlist)
 
-self.CurrentTrack = 0
+self.CurrentTrack = 1
 
 self.Status = "Stopped"
 
@@ -21,14 +21,14 @@ function Music:Next()
 	self.CurrentTrack += 1
 
 	if self.CurrentTrack > #self.Playlist then
-		self.CurrentTrack = 0
+		self.CurrentTrack = 1
 	end
 end
 
 function Music:Last()
 	self.CurrentTrack -= 1
 
-	if self.CurrentTrack < 0 then
+	if self.CurrentTrack < 1 then
 		self.CurrentTrack = #self.Playlist
 	end
 end

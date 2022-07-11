@@ -16,12 +16,12 @@ newSetting("crosscolor1", "CROSSHAIR COLOR 1", { Color3.new(), Color3.new(0, 1, 
 newSetting("crosscolor2", "CROSSHAIR COLOR 2", { Color3.new(), Color3.new(1, 0, 0) })
 
 -- Sliders
-newSetting("mvolume", "MUSIC VOLUME", { NumberRange.new(0, 10), 1 })
+newSetting("mvolume", "MUSIC VOLUME", { NumberRange.new(0, 200), 50, "%" })
 newSetting("fov", "FIELD OF VIEW", { NumberRange.new(60, 120), 90 })
 newSetting("bubble_radius", "BUBBLE RADIUS", { NumberRange.new(0, 25), 6, "studs" })
 
 -- Toggles
-newSetting("music", "IN-GAME MUSIC", true)
+-- newSetting("music", "IN-GAME MUSIC", true)
 newSetting("upsidedown", "UPSIDE DOWN MODE", false)
 newSetting("useskins", "HIDE ROPE PHYSICS", true)
 newSetting("colormode", "COLOR CORRECTION", true)
