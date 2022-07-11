@@ -6,6 +6,7 @@ local self = {}
 
 local TS = game:GetService("TweenService")
 local Players = game:GetService("Players")
+local GroupService = game:GetService("GroupService")
 local RunService = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 
@@ -29,6 +30,8 @@ local SliderCreator = require(script.Parent.Slider)
 local ColorPicker = require(script.Parent.ColorPicker)
 local SceneLoader = require(ModulesFolder.Gameplay.SceneLoader)
 local AccountNotice = require(script.Parent.AccountNotice)
+
+local GroupInfo = require(ModulesFolder.Data.GroupInfo)
 
 local New = require(script.Parent.WindowCreator)
 
@@ -251,6 +254,35 @@ function GetUsername(UserId: number)
 	return NameCache[UserId]
 end
 
+local VerifyCache = {}
+local PendingVerify = 0
+
+function IsVerified(UserId: number)
+	if VerifyCache[UserId] then
+		return VerifyCache[UserId]
+	end
+	VerifyCache[UserId] = false
+
+	local suc
+	PendingVerify += 1
+	repeat
+		suc = pcall(function()
+			local PlayerGroups = GroupService:GetGroupsAsync(UserId)
+			for _, Group: {Id: number, Rank: number} in PlayerGroups do
+				if Group["Id"] == GroupInfo["GroupID"] and Group["Rank"] >= GroupInfo["VerifyRank"] then
+					VerifyCache[UserId] = true
+				end
+			end
+		end)
+		if not suc then
+			task.wait(5.25)
+		end
+	until suc
+	PendingVerify -= 1
+
+	return VerifyCache[UserId]
+end
+
 local PageNumber = 1
 local LeaderboardCooldown = false
 local CooldownTime = 0.50
@@ -293,6 +325,10 @@ function LoadLeaderboard(MapName: string)
 
 			task.spawn(function()
 				LUser.Main.RealMain.Username.Text = GetUsername(ThisResult.userid)
+			end)
+
+			task.spawn(function()
+				LUser.Main.RealMain:FindFirstChild("Position").Verified.Visible = IsVerified(ThisResult.userid)
 			end)
 		else
 			PageCount = math.ceil(ThisResult.Count / 100)
