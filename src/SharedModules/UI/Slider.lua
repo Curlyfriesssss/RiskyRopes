@@ -1,6 +1,7 @@
 local UIS = game:GetService("UserInputService")
 
 local Slider = {}
+Slider.__index = Slider
 
 local map = require(script.Parent.Functions).Map
 
@@ -10,19 +11,20 @@ local function Step(self)
 end
 
 function Slider.new(SliderGUI: TextButton, CurrentValue: { NumberRange })
-	local self = {}
+	local self = {
+		_GUI = SliderGUI,
+		_progress = 0,
+		Value = 0,
+		Max = CurrentValue[1].Max,
+		Min = CurrentValue[1].Min,
+		MouseDown = false,
+		Unit = if CurrentValue[3] then CurrentValue[3] else "",
+		UpdateEvent = Instance.new("BindableEvent"),
+	}
 
-	self._GUI = SliderGUI
-	self._progress = 0
-
-	self.Value = 0
-	self.Max = CurrentValue[1].Max
-	self.Min = CurrentValue[1].Min
-	self.MouseDown = false
-	self.Unit = if CurrentValue[3] then CurrentValue[3] else ""
-	self.UpdateEvent = Instance.new("BindableEvent")
-
-	return setmetatable(self, { __index = Slider })
+	setmetatable(self, Slider)
+	
+	return self
 end
 
 function Slider:init()

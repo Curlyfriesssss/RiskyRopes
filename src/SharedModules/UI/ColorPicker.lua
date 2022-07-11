@@ -1,28 +1,30 @@
-local ColorPicker = {}
-local Slider = require(script.Parent.Slider)
-
 local UIS = game:GetService("UserInputService")
 
+local Slider = require(script.Parent.Slider)
+
+local ColorPicker = {}
+ColorPicker.__index = ColorPicker
+
+
 function ColorPicker.new(GUI: Frame, UpdateEvent: BindableEvent)
-	local self = {}
-
-	self._GUI = GUI
-	self.Color = Color3.fromHSV(1, 1, 1)
-
+	local self = {
+		_GUI = GUI,
+		Color = Color3.fromHSV(1, 1, 1),
+		MouseDown = false,
+		UpdateEvent = UpdateEvent,
+	}
+	
 	self.HueSlider = Slider.new(self._GUI.HueShift, { NumberRange.new(0, 360), 0 })
-
-	self.HueSlider:init()
 	self.HueSlider:Update(nil, 0)
-
-	self.MouseDown = false
-
-	self.UpdateEvent = UpdateEvent
+	self.HueSlider:init()
 
 	self.HueSlider.UpdateEvent.Event:Connect(function()
 		self:Update()
 	end)
 
-	return setmetatable(self, { __index = ColorPicker })
+	setmetatable(self, ColorPicker)
+	
+	return self
 end
 
 function ColorPicker:init()
