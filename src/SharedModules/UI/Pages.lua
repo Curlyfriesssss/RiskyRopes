@@ -254,6 +254,7 @@ end
 local PageNumber = 1
 local LeaderboardCooldown = false
 local CooldownTime = 0.50
+local PageCount = 1
 
 function LoadLeaderboard(MapName: string)
 	if LeaderboardCooldown then
@@ -293,6 +294,8 @@ function LoadLeaderboard(MapName: string)
 			task.spawn(function()
 				LUser.Main.RealMain.Username.Text = GetUsername(ThisResult.userid)
 			end)
+		else
+			PageCount = math.ceil(ThisResult.Count / 100)
 		end
 	end
 
@@ -307,9 +310,10 @@ function PagesModule:LoadLeaderboards()
 
 	local Next = PBar.Next
 	local Last = PBar.Previous
-	local Counter = PBar.PageNumber
+	local Counter: TextBox = PBar.PageNumber
 
 	local CurrentMap = "roomchan"
+	
 	-- Load map buttons
 	for MapName, MapInfo in MapData do
 		if MapName ~= "Diff" then
@@ -336,14 +340,27 @@ function PagesModule:LoadLeaderboards()
 
 		PageNumber += Amount
 
-		PageNumber = math.clamp(PageNumber, 1, math.huge)
+		PageNumber = math.clamp(PageNumber, 1, PageCount)
 
 		Counter.Text = PageNumber
 
-		if PageNumber ~= OldPNumber then
+		if PageNumber ~= OldPNumber or Amount == 0 then
 			LoadLeaderboard(CurrentMap)
 		end
 	end
+
+	Counter.FocusLost:Connect(function(enterPressed)
+		local New = tonumber(Counter.Text)
+
+		if New == nil then
+			New = 1
+		end
+
+		Counter.Text = New
+
+		PageNumber = tonumber(Counter.Text)
+		UpdatePageNumber(0)
+	end)
 
 	Next.MouseButton1Click:Connect(function()
 		UpdatePageNumber(1)
