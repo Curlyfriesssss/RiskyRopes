@@ -23,7 +23,7 @@ local UITextures = require(script.Parent.UITextures)
 local ModulesFolder = game.ReplicatedStorage.Modules
 
 local MapsFolder = game.ReplicatedStorage.Models.Maps
-local MapsModule = ModulesFolder.Gameplay.Maps
+local MapsModule = ModulesFolder.Data.Maps
 local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
 local SliderCreator = require(script.Parent.Slider)
