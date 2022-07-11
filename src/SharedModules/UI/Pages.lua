@@ -385,6 +385,10 @@ function PagesModule:LoadLeaderboards()
 		end
 	end
 
+	Pages.Leaderboards.Refresh.MouseButton1Click:Connect(function()
+		LoadLeaderboard(CurrentMap)
+	end)
+
 	Counter.FocusLost:Connect(function(enterPressed)
 		local New = tonumber(Counter.Text)
 
