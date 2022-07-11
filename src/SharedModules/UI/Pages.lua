@@ -22,7 +22,7 @@ local UITextures = require(script.Parent.UITextures)
 
 local ModulesFolder = game.ReplicatedStorage.Modules
 
-local MapsFolder = game.ReplicatedStorage.Models.Maps
+local MapsFolder = game.ReplicatedStorage.Maps
 local MapsModule = ModulesFolder.Data.Maps
 local MapData = require(MapsModule)
 local MapLoader = require(ModulesFolder.Gameplay.MapLoader)
@@ -422,7 +422,7 @@ function PagesModule:LoadLeaderboards()
 end
 
 function PagesModule:OpenCrate()
-	local Scene = SceneLoader(game.ReplicatedStorage.Models.Scenes.CrateOpening)
+	local Scene = SceneLoader(game.ReplicatedStorage.Scenes.CrateOpening)
 	Scene.AnimationTrack:GetMarkerReachedSignal("Particles"):Connect(function()
 		Scene.SceneObject.LootCrate.Neon.ParticleEmitter.Enabled = true
 	end)

@@ -81,6 +81,13 @@ return {
 		Difficulty = 2,
 	},
 
+	["Donkey"] = {
+		Author = 425079321,
+		Image = 9996380792,
+		Description = "",
+		Difficulty = 4,
+	},
+
 	["Whirlybird"] = {
 		Author = 425079321,
 		Image = 7716109977,

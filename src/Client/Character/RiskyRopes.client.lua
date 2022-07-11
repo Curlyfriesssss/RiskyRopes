@@ -70,7 +70,7 @@ function CreateForce()
 end
 
 function CreateSkin()
-	local S = game.ReplicatedStorage.Models.Skins.Lightning:Clone()
+	local S = game.ReplicatedStorage.Skins.Lightning:Clone()
 	S.Parent = ObjectFolder
 	S.Attachment0 = SkinAttach
 

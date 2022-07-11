@@ -6,11 +6,11 @@
 local mapLoader = {}
 local self = {}
 
-if not game.ReplicatedStorage.Models:FindFirstChild("Maps") then
-	Instance.new("Folder", game.ReplicatedStorage.Models).Name = "Maps"
+if not game.ReplicatedStorage:FindFirstChild("Maps") then
+	Instance.new("Folder", game.ReplicatedStorage).Name = "Maps"
 end
 
-self.MapFolder = game.ReplicatedStorage.Models.Maps
+self.MapFolder = game.ReplicatedStorage.Maps
 self.MapLoadedEvent = Instance.new("BindableEvent")
 
 function mapLoader:ClearLighting()
