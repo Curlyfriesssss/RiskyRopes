@@ -5,7 +5,6 @@ local Slider = require(script.Parent.Slider)
 local ColorPicker = {}
 ColorPicker.__index = ColorPicker
 
-
 function ColorPicker.new(GUI: Frame, UpdateEvent: BindableEvent)
 	local self = {
 		_GUI = GUI,
@@ -13,7 +12,7 @@ function ColorPicker.new(GUI: Frame, UpdateEvent: BindableEvent)
 		MouseDown = false,
 		UpdateEvent = UpdateEvent,
 	}
-	
+
 	self.HueSlider = Slider.new(self._GUI.HueShift, { NumberRange.new(0, 360), 0 })
 	self.HueSlider:Update(nil, 0)
 	self.HueSlider:init()
@@ -23,7 +22,7 @@ function ColorPicker.new(GUI: Frame, UpdateEvent: BindableEvent)
 	end)
 
 	setmetatable(self, ColorPicker)
-	
+
 	return self
 end
 

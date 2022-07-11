@@ -268,7 +268,7 @@ function IsVerified(UserId: number)
 	repeat
 		suc = pcall(function()
 			local PlayerGroups = GroupService:GetGroupsAsync(UserId)
-			for _, Group: {Id: number, Rank: number} in PlayerGroups do
+			for _, Group: { Id: number, Rank: number } in PlayerGroups do
 				if Group["Id"] == GroupInfo["GroupID"] and Group["Rank"] >= GroupInfo["VerifyRank"] then
 					VerifyCache[UserId] = true
 				end
@@ -349,7 +349,7 @@ function PagesModule:LoadLeaderboards()
 	local Counter: TextBox = PBar.PageNumber
 
 	local CurrentMap = "roomchan"
-	
+
 	-- Load map buttons
 	for MapName, MapInfo in MapData do
 		if MapName ~= "Diff" then

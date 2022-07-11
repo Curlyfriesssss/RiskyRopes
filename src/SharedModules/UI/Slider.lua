@@ -23,7 +23,7 @@ function Slider.new(SliderGUI: TextButton, CurrentValue: { NumberRange })
 	}
 
 	setmetatable(self, Slider)
-	
+
 	return self
 end
 
