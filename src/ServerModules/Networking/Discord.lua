@@ -34,14 +34,16 @@ end
 function Webhook:send(Content: string, Embed: Embed)
 	local Data = {
 		content = Content,
-		embed = Embed,
+		embeds = {Embed:GetClean()},
 	}
 
-	return HTTPS:PostAsync(self.URL, Embed:GetJSON(), Enum.HttpContentType.ApplicationJson, false)
+	Data = HTTPS:JSONEncode(Data)
+	
+	return HTTPS:PostAsync(self.URL, Data, Enum.HttpContentType.ApplicationJson, false)
 end
 
 -- Embeds
-function Discord.embed()
+function Discord.embed() 
 	local self = {
 		Title = "",
 		Description = "",
@@ -63,9 +65,9 @@ function Discord.embed()
 	return self
 end
 
-function Embed:GetJSON()
+function Embed:GetClean()
 	local output = {
-		color = Color3ToHex(self.Color),
+		color = Color3ToHex.toHex(self.Color),
 		title = self.Title,
 		url = self.URL,
 		description = self.Description,
@@ -73,7 +75,7 @@ function Embed:GetJSON()
 		footer = { text = self.Author.Text, icon_url = self.Author.Icon_URL },
 	}
 
-	return HTTPS:JSONEncode(output)
+	return output -- HTTPS:JSONEncode(output)
 end
 
 function Embed:SetFooter(Text: string, Icon_URL: string)
