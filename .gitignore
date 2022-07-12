@@ -11,3 +11,4 @@ Authorization.lua
 
 PythonWebserver/ServerInfo.json
 src/ServerModules/Data/DiscordWebhooks.lua
+src/ServerModules/Data/JSONBinInfo.lua
