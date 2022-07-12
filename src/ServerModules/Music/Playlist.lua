@@ -6,5 +6,5 @@ function createTrack(ID: number, PlaybackSpeed: number)
 end
 
 return {
-	createTrack(10186199663, 1)
+	createTrack(10186199663, 1),
 }

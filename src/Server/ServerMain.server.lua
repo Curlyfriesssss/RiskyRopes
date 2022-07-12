@@ -36,7 +36,7 @@ function _Init()
 		WebServer = require(ModulesFolder.Networking.WebServer),
 		Leaderboards = require(ModulesFolder.Networking.Leaderboards),
 		JSONBin = require(ModulesFolder.Networking.JSONBin),
-		Discord = require(ModulesFolder.Networking.Discord)
+		Discord = require(ModulesFolder.Networking.Discord),
 	}
 
 	-- Music Player
@@ -51,7 +51,7 @@ function _Init()
 			repeat
 				task.wait()
 			until not Music.MusicObject.Playing
-			print('Finished song')
+			print("Finished song")
 			Music:Stop()
 			task.wait(0.50)
 		end
