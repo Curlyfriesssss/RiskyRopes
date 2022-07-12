@@ -17,6 +17,17 @@ return {
 	LVLToXP = function(LVL: number)
 		return math.floor((LVL ^ 2) * (XPDropOff * 2))
 	end,
+	ScoreToReadable = function(Score: number)
+		local MS = Score
+		local TotalSeconds = math.floor(MS / 1000)
+		
+		MS = MS % 1000
+
+		local Seconds = TotalSeconds % 60
+		local Minutes = math.floor(TotalSeconds / 60)
+
+		return ("%02d:%02d.%03d"):format(Minutes, Seconds, MS)
+	end,
 	SecondsToClock = function(seconds)
 		local seconds = tonumber(seconds)
 

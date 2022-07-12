@@ -12,6 +12,14 @@
 		{
 			"Name": "GetLeaderboard",
 			"ClassName": "RemoteFunction"
+		},
+		{
+			"Name": "SetScore",
+			"ClassName": "RemoteEvent"
+		},
+		{
+			"Name": "GetChatTags",
+			"ClassName": "RemoteFunction"
 		}
 	]
 }

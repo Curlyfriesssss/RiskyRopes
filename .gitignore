@@ -10,5 +10,5 @@ Authorization.lua
 /*.rbxl.lock
 
 PythonWebserver/ServerInfo.json
-src/ServerModules/Data/DiscordWebhooks.lua
 src/ServerModules/Data/JSONBinInfo.lua
+src/ServerModules/Data/DiscordWebhooks.lua

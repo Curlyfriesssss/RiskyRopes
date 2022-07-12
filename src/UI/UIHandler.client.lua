@@ -20,6 +20,7 @@ local StarterGui = game:GetService("StarterGui")
 local UIS = game:GetService("UserInputService")
 local CAS = game:GetService("ContextActionService")
 local TS = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RS = game:GetService("RunService")
 
 -- Other
@@ -39,6 +40,8 @@ local UIFolder = game.ReplicatedStorage.UI
 local Player = game.Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 
+local Remotes = ReplicatedStorage.Remotes
+
 -- Requires
 local New = require(Modules.UI.WindowCreator)
 local ApplyFunctionality = require(Modules.UI.BasicWindowFunctionality)
@@ -53,6 +56,8 @@ local Mods = {
 	Timer = require(Modules.Gameplay.Timer),
 	Notice = require(Modules.UI.AccountNotice),
 }
+
+local CurrentMap = ""
 
 ---------------------------------------
 -- Functions
@@ -119,7 +124,9 @@ function Init()
 		end
 	end
 
-	Mods.MapLoader.MapLoadedEvent.Event:Connect(function()
+	Mods.MapLoader.MapLoadedEvent.Event:Connect(function(MapName)
+		CurrentMap = MapName
+
 		MouseLocked = true
 		Menu.Visible = false
 
@@ -130,8 +137,10 @@ function Init()
 
 		-- Temporary timer pause
 		workspace.Map.Orbs:GetChildren()[1].Touched:Connect(function(P)
-			if game.Players:GetPlayerFromCharacter(P.Parent) == Player then
+			if game.Players:GetPlayerFromCharacter(P.Parent) == Player and Mods.Timer.State == 1 then
 				Mods.Timer:Pause()
+
+				Remotes.SetScore:FireServer(CurrentMap, math.floor(Mods.Timer.CurrentTime * 1000))
 			end
 		end)
 	end)

@@ -18,7 +18,7 @@ function HideCharacter(Character: Model, Distance: number)
 	end)()
 end
 
-Camera:GetPropertyChangedSignal("CFrame"):Connect(function()
+RS:BindToRenderStep("HidePlayerLoop", Enum.RenderPriority.Camera.Value + 1, function()
 	local Players = Players:GetPlayers()
 
 	if #Players <= 1 then
