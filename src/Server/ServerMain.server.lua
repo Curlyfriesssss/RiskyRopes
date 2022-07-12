@@ -35,6 +35,8 @@ function _Init()
 		Purchase = require(ModulesFolder.PurchaseHandler),
 		WebServer = require(ModulesFolder.Networking.WebServer),
 		Leaderboards = require(ModulesFolder.Networking.Leaderboards),
+		JSONBin = require(ModulesFolder.Networking.JSONBin),
+		Discord = require(ModulesFolder.Networking.Discord)
 	}
 
 	-- Music Player
