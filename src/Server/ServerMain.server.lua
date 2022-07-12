@@ -6,6 +6,7 @@ local RS = game:GetService("RunService")
 local HTTP = game:GetService("HttpService")
 
 local ModulesFolder = game.ServerStorage.ServerModules
+local DataFolder = game.ServerStorage.ServerModules.Data
 
 -- Tables
 local Mods = {}
