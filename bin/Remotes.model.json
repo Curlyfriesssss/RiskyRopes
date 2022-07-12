@@ -16,6 +16,10 @@
 		{
 			"Name": "SetScore",
 			"ClassName": "RemoteEvent"
+		},
+		{
+			"Name": "GetChatTags",
+			"ClassName": "RemoteFunction"
 		}
 	]
 }
