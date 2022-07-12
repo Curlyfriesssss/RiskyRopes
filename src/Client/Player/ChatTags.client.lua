@@ -1,5 +1,9 @@
 local TextChatService = game:GetService("TextChatService")
 local Players = game:GetService("Players")
+local RStorage = game:GetService("ReplicatedStorage")
+
+
+local Remotes = RStorage.Remotes
 
 function GenerateChatTag(Message: string, Color: Color3)
 	local Output = [[<font color="rgb(%s,%s,%s)">[%s]</font> ]]
@@ -16,12 +20,15 @@ TextChatService.OnIncomingMessage = function(Message: TextChatMessage)
 
 	if Message.TextSource then
 		local Player = Players:GetPlayerByUserId(Message.TextSource.UserId)
+		local PlayerTags = Remotes.GetChatTags:InvokeServer(Player)
 
-		local ChatTag = Player:GetAttribute("ChatTag")
-		local ChatTagColor = Player:GetAttribute("ChatTagColor")
+		for _, ChatTag in PlayerTags do
+			local ChatTagText = ChatTag.Text
+			local ChatTagColor = ChatTag.Color
 
-		if ChatTag then
-			Props.PrefixText = GenerateChatTag(ChatTag, ChatTagColor) .. Message.PrefixText
+			if ChatTagText then
+				Props.PrefixText = GenerateChatTag(ChatTagText, ChatTagColor) .. Message.PrefixText
+			end
 		end
 	end
 

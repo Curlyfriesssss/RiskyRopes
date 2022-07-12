@@ -74,6 +74,11 @@ return function(ImportantData)
 				local Webhook = Discord.webhook(DiscordInfo.Webhooks[MapName:lower():gsub("%s", "_")])
 				Webhook:send("", Embed)
 			end
+		end,
+		[Remotes.GetChatTags] = function(Player: Player)
+			return {
+				{Text = 'RISKY', Color = Color3.new(0.015686, 0.972549, 0.909803)}
+			}
 		end
 	}
 
