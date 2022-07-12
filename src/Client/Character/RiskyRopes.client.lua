@@ -147,8 +147,7 @@ RS.RenderStepped:Connect(function()
 	local fov = shared.Settings.fov.Value
 
 	if dfov then
-		TS:Create(Camera, TweenInfo.new(0.75), { FieldOfView = math.clamp(RootPart.Velocity.Magnitude, fov, fov + 30) })
-			:Play()
+		TS:Create(Camera, TweenInfo.new(0.75), { FieldOfView = math.clamp(RootPart.Velocity.Magnitude, fov, fov + 30) }):Play()
 	else
 		Camera.FieldOfView = fov
 	end
