@@ -1,9 +1,12 @@
 local HTTPS = game:GetService("HttpService")
+local GroupService = game:GetService("GroupService")
 
 local DiscordInfo = require(script.Parent.Parent.Data.DiscordWebhooks)
 
 local SharedModules = game.ReplicatedStorage.Modules
 local ExtraFunctions = require(SharedModules.UI.Functions)
+
+
 
 return function(ImportantData)
 	local LoadedModules = ImportantData.Mods
@@ -76,9 +79,7 @@ return function(ImportantData)
 			end
 		end,
 		[Remotes.GetChatTags] = function(Player: Player)
-			return {
-				{Text = 'RISKY', Color = Color3.new(0.015686, 0.972549, 0.909803)}
-			}
+			return ImportantData.ChatTags[Player]
 		end
 	}
 
