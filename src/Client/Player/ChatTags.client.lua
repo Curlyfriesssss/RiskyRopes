@@ -27,10 +27,12 @@ TextChatService.OnIncomingMessage = function(Message: TextChatMessage)
 			local ChatTagColor = ChatTag.Color
 
 			if ChatTagText then
-				Props.PrefixText = GenerateChatTag(ChatTagText, ChatTagColor) .. Message.PrefixText
+				Props.PrefixText = GenerateChatTag(ChatTagText, ChatTagColor) .. Props.PrefixText
 			end
 		end
 	end
+
+	Props.PrefixText = Props.PrefixText .. Message.PrefixText
 
 	return Props
 end
