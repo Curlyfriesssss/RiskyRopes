@@ -78,7 +78,7 @@ function mapLoader:load(MapName: string)
 		end
 	end
 
-	self.MapLoadedEvent:Fire()
+	self.MapLoadedEvent:Fire(MapName)
 end
 
 return setmetatable(self, { __index = mapLoader })
