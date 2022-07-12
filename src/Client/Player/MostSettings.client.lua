@@ -7,6 +7,8 @@ until shared.Settings
 
 local Settings = shared.Settings
 
+SoundService.Music.Volume = 0
+
 RS.RenderStepped:Connect(function()
 	local MusicVolume = Settings.mvolume.Value / 100
 
