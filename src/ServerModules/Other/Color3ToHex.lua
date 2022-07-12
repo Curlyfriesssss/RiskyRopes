@@ -27,7 +27,7 @@ function Module.toHex(color)
 		final = final..char
 	until current <= 0
 	
-	return string.reverse(final)
+	return tonumber("0x" .. string.reverse(final))
 end
 
 return Module
