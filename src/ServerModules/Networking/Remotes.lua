@@ -78,7 +78,7 @@ return function(ImportantData)
 				Webhook:send("", Embed)
 			end
 		end,
-		[Remotes.GetChatTags] = function(Player: Player)
+		[Remotes.GetChatTags] = function(_, Player: Player)
 			return ImportantData.ChatTags[Player]
 		end
 	}
