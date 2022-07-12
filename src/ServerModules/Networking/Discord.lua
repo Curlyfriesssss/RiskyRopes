@@ -8,6 +8,8 @@ export type Embed = {
 	Footer: { Text: string, Icon_URL: string },
 }
 
+local DiscordInfo = require(script.Parent.Parent.Data.DiscordWebhooks)
+
 local HTTPS = game:GetService("HttpService")
 
 local Color3ToHex = require(script.Parent.Parent.Other.Color3ToHex)
@@ -39,7 +41,7 @@ function Webhook:send(Content: string, Embed: Embed)
 
 	Data = HTTPS:JSONEncode(Data)
 	
-	return HTTPS:PostAsync(self.URL, Data, Enum.HttpContentType.ApplicationJson, false)
+	return HTTPS:PostAsync(DiscordInfo.Proxy .. self.URL, Data, Enum.HttpContentType.ApplicationJson, false)
 end
 
 -- Embeds
@@ -54,6 +56,7 @@ function Discord.embed()
 			URL = "",
 			Icon_URL = "",
 		},
+		Fields = {},
 		Footer = {
 			Text = "",
 			Icon_URL = "",
@@ -65,6 +68,14 @@ function Discord.embed()
 	return self
 end
 
+function Embed:AddField(Name: string, Value: any, Inline: boolean)
+	table.insert(self.Fields, {
+		name = Name,
+		value = tostring(Value),
+		inline = tostring(Inline)
+	})
+end
+
 function Embed:GetClean()
 	local output = {
 		color = Color3ToHex.toHex(self.Color),
@@ -73,6 +84,7 @@ function Embed:GetClean()
 		description = self.Description,
 		author = { name = self.Author.Name, icon_url = self.Author.Icon_URL, url = self.Author.URL },
 		footer = { text = self.Author.Text, icon_url = self.Author.Icon_URL },
+		fields = self.Fields
 	}
 
 	return output -- HTTPS:JSONEncode(output)
