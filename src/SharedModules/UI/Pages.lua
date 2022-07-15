@@ -46,6 +46,8 @@ local LeaderboardCooldown = false
 local CooldownTime = 0.50
 local PageCount = 1
 
+local DefaultMap = "roomchan"
+
 -- why yes I did hardcode this...
 -- pls dont be mad im just not sure where else to put 4 colors
 
@@ -346,7 +348,7 @@ function PagesModule:LoadLeaderboards()
 	local Last = PBar.Previous
 	local Counter: TextBox = PBar.PageNumber
 
-	local CurrentMap = "roomchan"
+	local CurrentMap = DefaultMap
 
 	-- Load map buttons
 	for MapName, MapInfo in MapData do
@@ -416,7 +418,11 @@ function PagesModule:LoadLeaderboards()
 		end
 	end)
 
-	LoadLeaderboard("roomchan")
+	LoadLeaderboard(DefaultMap)
+end
+
+function PagesModule:LoadInventory()
+	
 end
 
 function PagesModule:OpenCrate()
