@@ -18,6 +18,4 @@ RS.RenderStepped:Connect(function()
 	Lighting.Bloom.Enabled = Settings.bloom.Value
 	Lighting.ColorCorrection.Enabled = Settings.colormode.Value
 	Lighting.GlobalShadows = Settings.shade.Value
-	
-
 end)

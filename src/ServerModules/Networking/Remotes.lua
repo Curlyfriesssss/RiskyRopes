@@ -6,8 +6,6 @@ local DiscordInfo = require(script.Parent.Parent.Data.DiscordWebhooks)
 local SharedModules = game.ReplicatedStorage.Modules
 local ExtraFunctions = require(SharedModules.UI.Functions)
 
-
-
 return function(ImportantData)
 	local LoadedModules = ImportantData.Mods
 	local UserAccounts = ImportantData.UserAccounts
@@ -63,24 +61,24 @@ return function(ImportantData)
 
 			if Result.StatusCode == 200 then
 				local Embed = Discord.embed()
-				
+
 				Embed.Title = "__New Time Achieved__"
 
-				Embed:AddField('Username',("`@%s`"):format(Player.Name),true)
-				Embed:AddField('User ID',("`%s`"):format(Player.UserId),true)
+				Embed:AddField("Username", ("`@%s`"):format(Player.Name), true)
+				Embed:AddField("User ID", ("`%s`"):format(Player.UserId), true)
 
-				Embed:AddField('Map',("`%s`"):format(MapName),false)
-				Embed:AddField('New Time',("`%s`"):format(ExtraFunctions.ScoreToReadable(Score)),false)
+				Embed:AddField("Map", ("`%s`"):format(MapName), false)
+				Embed:AddField("New Time", ("`%s`"):format(ExtraFunctions.ScoreToReadable(Score)), false)
 
 				Embed.Color = Color3.new(0, 1, 0.517647)
-				
+
 				local Webhook = Discord.webhook(DiscordInfo.Webhooks[MapName:lower():gsub("%s", "_")])
 				Webhook:send("", Embed)
 			end
 		end,
 		[Remotes.GetChatTags] = function(_, Player: Player)
 			return ImportantData.ChatTags[Player]
-		end
+		end,
 	}
 
 	for Remote, FunctionToRun in RemotesToFunctions do

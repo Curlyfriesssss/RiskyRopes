@@ -39,7 +39,7 @@ function _Init()
 		Leaderboards = require(ModulesFolder.Networking.Leaderboards),
 		JSONBin = require(ModulesFolder.Networking.JSONBin),
 		Discord = require(ModulesFolder.Networking.Discord),
-		ChatTag = require(ModulesFolder.Other.ChatTag)
+		ChatTag = require(ModulesFolder.Other.ChatTag),
 	}
 
 	-- Music Player
@@ -65,7 +65,6 @@ function _Init()
 		LS.Name = "leaderstats"
 		LS.Parent = Player
 
-
 		UserChatTags[Player] = Mods.ChatTag:GetChatTagsForPlayer(Player)
 		UserAccounts[Player] = Mods.Account:get(Player)
 
@@ -79,7 +78,7 @@ function _Init()
 	Mods.Remotes({
 		Mods = Mods,
 		UserAccounts = UserAccounts,
-		ChatTags = UserChatTags
+		ChatTags = UserChatTags,
 	})
 end
 

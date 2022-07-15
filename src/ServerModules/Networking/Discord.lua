@@ -36,16 +36,16 @@ end
 function Webhook:send(Content: string, Embed: Embed)
 	local Data = {
 		content = Content,
-		embeds = {Embed:GetClean()},
+		embeds = { Embed:GetClean() },
 	}
 
 	Data = HTTPS:JSONEncode(Data)
-	
+
 	return HTTPS:PostAsync(DiscordInfo.Proxy .. self.URL, Data, Enum.HttpContentType.ApplicationJson, false)
 end
 
 -- Embeds
-function Discord.embed() 
+function Discord.embed()
 	local self = {
 		Title = "",
 		Description = "",
@@ -72,7 +72,7 @@ function Embed:AddField(Name: string, Value: any, Inline: boolean)
 	table.insert(self.Fields, {
 		name = Name,
 		value = tostring(Value),
-		inline = tostring(Inline)
+		inline = tostring(Inline),
 	})
 end
 
@@ -84,7 +84,7 @@ function Embed:GetClean()
 		description = self.Description,
 		author = { name = self.Author.Name, icon_url = self.Author.Icon_URL, url = self.Author.URL },
 		footer = { text = self.Author.Text, icon_url = self.Author.Icon_URL },
-		fields = self.Fields
+		fields = self.Fields,
 	}
 
 	return output -- HTTPS:JSONEncode(output)

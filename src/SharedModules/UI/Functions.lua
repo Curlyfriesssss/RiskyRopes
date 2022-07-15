@@ -20,7 +20,7 @@ return {
 	ScoreToReadable = function(Score: number)
 		local MS = Score
 		local TotalSeconds = math.floor(MS / 1000)
-		
+
 		MS = MS % 1000
 
 		local Seconds = TotalSeconds % 60

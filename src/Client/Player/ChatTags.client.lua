@@ -2,7 +2,6 @@ local TextChatService = game:GetService("TextChatService")
 local Players = game:GetService("Players")
 local RStorage = game:GetService("ReplicatedStorage")
 
-
 local Remotes = RStorage.Remotes
 
 function GenerateChatTag(Message: string, Color: Color3)

@@ -421,9 +421,7 @@ function PagesModule:LoadLeaderboards()
 	LoadLeaderboard(DefaultMap)
 end
 
-function PagesModule:LoadInventory()
-	
-end
+function PagesModule:LoadInventory() end
 
 function PagesModule:OpenCrate()
 	local Scene = SceneLoader(game.ReplicatedStorage.Scenes.CrateOpening)

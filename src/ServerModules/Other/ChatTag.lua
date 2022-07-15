@@ -1,7 +1,6 @@
 local GroupService = game:GetService("GroupService")
 local Players = game:GetService("Players")
 
-
 local SharedModules = game.ReplicatedStorage.Modules
 local GroupInfo = require(SharedModules.Data.GroupInfo)
 
@@ -29,7 +28,6 @@ function GetGroupRank(UserId: number)
 		end
 	until suc
 
-
 	return GroupCache[UserId]
 end
 
@@ -41,7 +39,7 @@ local self = {}
 function _new(Text: string, Color: Color3)
 	local ChatTag = {
 		Text = Text,
-		Color = Color
+		Color = Color,
 	}
 	return ChatTag
 end
@@ -52,12 +50,12 @@ function ChatTag:GetChatTagsForPlayer(Player: Player)
 
 	-- Is staff
 	if GroupRank >= GroupInfo.StaffRank then
-		table.insert(ChatTags, _new("STAFF", Color3.new(0.780392, 0.670588, 0.333333)))		
+		table.insert(ChatTags, _new("STAFF", Color3.new(0.780392, 0.670588, 0.333333)))
 	end
 
 	-- Is developer
 	if GroupRank >= GroupInfo.DeveloperRank then
-		table.insert(ChatTags, _new("DEV", Color3.new(0.780392, 0.333333, 0.721568)))		
+		table.insert(ChatTags, _new("DEV", Color3.new(0.780392, 0.333333, 0.721568)))
 	end
 
 	return ChatTags
