@@ -62,7 +62,7 @@
 				}
 			},
 			"$properties": {
-				"Technology": "Future",
+				"Technology": "ShadowMap",
 				"GlobalShadows": true
 			}
 		},
