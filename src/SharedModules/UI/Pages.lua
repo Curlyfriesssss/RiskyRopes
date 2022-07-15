@@ -37,6 +37,15 @@ local New = require(script.Parent.WindowCreator)
 
 local UIFolder = game.ReplicatedStorage.UI
 
+local NameCache = {}
+local PendingNames = 0
+local VerifyCache = {}
+local PendingVerify = 0
+local PageNumber = 1
+local LeaderboardCooldown = false
+local CooldownTime = 0.50
+local PageCount = 1
+
 -- why yes I did hardcode this...
 -- pls dont be mad im just not sure where else to put 4 colors
 
@@ -230,9 +239,6 @@ function ClearLeaderboard()
 	end
 end
 
-local NameCache = {}
-local PendingNames = 0
-
 function GetUsername(UserId: number)
 	if NameCache[UserId] then
 		return NameCache[UserId]
@@ -253,9 +259,6 @@ function GetUsername(UserId: number)
 
 	return NameCache[UserId]
 end
-
-local VerifyCache = {}
-local PendingVerify = 0
 
 function IsVerified(UserId: number)
 	if VerifyCache[UserId] then
@@ -282,11 +285,6 @@ function IsVerified(UserId: number)
 
 	return VerifyCache[UserId]
 end
-
-local PageNumber = 1
-local LeaderboardCooldown = false
-local CooldownTime = 0.50
-local PageCount = 1
 
 function LoadLeaderboard(MapName: string)
 	if LeaderboardCooldown then
